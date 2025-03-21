@@ -2,41 +2,97 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Store() {
-    return (
-        <div className="min-h-screen bg-gray-900 text-white py-10 px-5 md:px-20">
-            {/* Banner Promosi */}
-            <div className="bg-gradient-to-r from-green-500 to-blue-600 text-center py-10 rounded-lg shadow-lg">
-                <h1 className="text-4xl font-bold">Minecraft Store</h1>
-                <p className="mt-3 text-lg">Dapatkan item eksklusif, rank, dan kredit dengan promo terbaru!</p>
-            </div>
+  // Style Objects
+  const containerStyle = {
+    minHeight: "100vh",
+    backgroundColor: "#1a202c", // bg-gray-900
+    color: "#ffffff",
+    padding: "2.5rem 1.25rem", // py-10 px-5
+  };
 
-            {/* Promo Terbaru 
-            <div className="mt-10">
-                <h2 className="text-2xl font-semibold mb-5">Promo Terbaru</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
-                        <h3 className="text-xl font-bold">Rank VIP</h3>
-                        <p className="mt-2">Dapatkan akses eksklusif dengan harga spesial!</p>
-                    </div>
-                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
-                        <h3 className="text-xl font-bold">Coin Bonus</h3>
-                        <p className="mt-2">Beli 1000 kredit, dapat tambahan 200 kredit gratis!</p>
-                    </div>
-                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
-                        <h3 className="text-xl font-bold">Bundle Spesial</h3>
-                        <p className="mt-2">Dapatkan paket lengkap item dengan harga diskon!</p>
-                    </div>
-                </div>
-            </div>
-            */}
-            {/* Tombol Redirect */}
-            <div className="text-center mt-10">
-                <Link to="https://your-store-link.com" target="_blank" rel="noopener noreferrer" className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold text-lg shadow-lg transition duration-300">
-                    Kunjungi Store Sekarang
-                </Link>
-            </div>
+  // Banner Promosi Style
+  const bannerStyle = {
+    background: "linear-gradient(to right, #48bb78, #4299e1)", // from-green-500 to-blue-600
+    textAlign: "center",
+    padding: "2.5rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+  };
+
+  const bannerTitleStyle = {
+    fontSize: "2.5rem", // roughly equivalent to text-4xl
+    fontWeight: "bold",
+  };
+
+  const bannerTextStyle = {
+    marginTop: "0.75rem", // mt-3
+    fontSize: "1.125rem", // text-lg
+  };
+
+  // Tombol Redirect Style
+  const buttonContainerStyle = {
+    textAlign: "center",
+    marginTop: "2.5rem", // mt-10
+  };
+
+  const buttonStyle = {
+    backgroundColor: "#48bb78", // bg-green-500
+    color: "#ffffff",
+    padding: "0.75rem 1.5rem", // py-3 px-6
+    borderRadius: "0.5rem", // rounded-lg
+    fontWeight: "bold",
+    fontSize: "1.125rem", // text-lg
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+    textDecoration: "none",
+    transition: "background-color 0.3s ease",
+  };
+
+  return (
+    <div style={containerStyle}>
+      {/* Banner Promosi */}
+      <div style={bannerStyle}>
+        <h1 style={bannerTitleStyle}>Minecraft Store</h1>
+        <p style={bannerTextStyle}>
+          Dapatkan item eksklusif, rank, dan kredit dengan promo terbaru!
+        </p>
+      </div>
+
+      {/* Promo Terbaru (bagian ini dikomentari jika tidak digunakan) */}
+      {/*
+      <div style={{ marginTop: "2.5rem" }}>
+        <h2 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1.25rem" }}>
+          Promo Terbaru
+        </h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem" }}>
+          <div style={{ backgroundColor: "#2d3748", padding: "1.25rem", borderRadius: "0.5rem", boxShadow: "0px 4px 6px rgba(0,0,0,0.1)" }}>
+            <h3 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Rank VIP</h3>
+            <p style={{ marginTop: "0.5rem" }}>Dapatkan akses eksklusif dengan harga spesial!</p>
+          </div>
+          <div style={{ backgroundColor: "#2d3748", padding: "1.25rem", borderRadius: "0.5rem", boxShadow: "0px 4px 6px rgba(0,0,0,0.1)" }}>
+            <h3 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Coin Bonus</h3>
+            <p style={{ marginTop: "0.5rem" }}>Beli 1000 kredit, dapat tambahan 200 kredit gratis!</p>
+          </div>
+          <div style={{ backgroundColor: "#2d3748", padding: "1.25rem", borderRadius: "0.5rem", boxShadow: "0px 4px 6px rgba(0,0,0,0.1)" }}>
+            <h3 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Bundle Spesial</h3>
+            <p style={{ marginTop: "0.5rem" }}>Dapatkan paket lengkap item dengan harga diskon!</p>
+          </div>
         </div>
-    );
+      </div>
+      */}
+
+      {/* Tombol Redirect */}
+      <div style={buttonContainerStyle}>
+        <Link
+          to="https://store.alwination.id"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={buttonStyle}
+        >
+          Kunjungi Store Sekarang
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default Store;

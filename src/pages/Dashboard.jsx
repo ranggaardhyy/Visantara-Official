@@ -32,42 +32,94 @@ const Dashboard = () => {
         }
     };
 
-    return (
-        <div className="container mx-auto p-4 text-center">
-            <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+    // Style Object untuk inline styling
+    const containerStyle = {
+        maxWidth: "800px",
+        margin: "0 auto",
+        padding: "16px",
+        textAlign: "center",
+        color: "#333",
+    };
 
+    const headingStyle = {
+        fontSize: "2rem",
+        fontWeight: "bold",
+        marginBottom: "24px",
+    };
+
+    const formStyle = {
+        marginBottom: "24px",
+    };
+
+    const inputStyle = {
+        padding: "8px",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        width: "100%",
+        marginBottom: "8px",
+    };
+
+    const selectStyle = {
+        padding: "8px",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        width: "100%",
+        marginBottom: "8px",
+    };
+
+    const buttonStyle = {
+        padding: "10px 20px",
+        backgroundColor: "#007BFF",
+        color: "#fff",
+        border: "none",
+        borderRadius: "4px",
+        cursor: "pointer",
+        fontSize: "1rem",
+    };
+
+    const playerInfoStyle = {
+        marginTop: "24px",
+        padding: "16px",
+        backgroundColor: "#f0f0f0",
+        color: "#000",
+        borderRadius: "4px",
+    };
+
+    const errorStyle = {
+        color: "red",
+        marginTop: "16px",
+    };
+
+    return (
+        <div style={containerStyle}>
+            <h1 style={headingStyle}>Dashboard</h1>
             {/* Form Login */}
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} style={formStyle}>
                 <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Masukkan Username Minecraft"
-                    className="px-4 py-2 border rounded w-full"
+                    style={inputStyle}
                     required
                 />
-
                 <select
                     value={platform}
                     onChange={(e) => setPlatform(e.target.value)}
-                    className="px-4 py-2 border rounded w-full"
+                    style={selectStyle}
                 >
                     <option value="java">Java Edition</option>
                     <option value="bedrock">Bedrock Edition</option>
                 </select>
-
-                <button
-                    type="submit"
-                    className="px-6 py-2 bg-blue-600 text-white rounded"
-                >
+                <button type="submit" style={buttonStyle}>
                     Login
                 </button>
             </form>
 
             {/* Tampilkan Info Player */}
             {playerInfo && (
-                <div className="mt-6 p-4 bg-gray-800 text-white rounded">
-                    <h2 className="text-xl font-semibold">Info Player</h2>
+                <div style={playerInfoStyle}>
+                    <h2 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Info Player</h2>
                     <p>Username: {playerInfo.username}</p>
                     <p>Platform: {playerInfo.platform}</p>
                     <p>Level: {playerInfo.level}</p>
@@ -76,7 +128,7 @@ const Dashboard = () => {
             )}
 
             {/* Tampilkan Error Jika Ada */}
-            {error && <p className="text-red-500 mt-4">{error}</p>}
+            {error && <p style={errorStyle}>{error}</p>}
         </div>
     );
 };
