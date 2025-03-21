@@ -10,7 +10,7 @@ const Store = () => {
                 <p className="mt-2">Promo berlaku dari <b>20 Maret 2025 - 31 Maret 2025</b>, jadi ini kesempatan terbaik buat kalian untuk upgrade rank dengan harga spesial</p>            
             </div>
             
-            {/* Daftar Item Populer */}
+            {/* Daftar Item Populer 
             <div className="mt-10">
                 <h3 className="text-2xl font-semibold mb-4">Item Populer</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -27,7 +27,8 @@ const Store = () => {
                         <p className="mt-2">Gunakan untuk membeli item eksklusif!</p>
                     </div>
                 </div>
-            </div>
+            </div> 
+            */}
             
             {/* Tombol Redirect ke Store */}
             <div className="mt-10">
