@@ -5,8 +5,9 @@ const Store = () => {
         <div className="container mx-auto p-6 text-center">
             {/* Banner Promosi */}
             <div className="bg-blue-600 text-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold">Promo Spesial!</h2>
-                <p className="mt-2">Dapatkan diskon hingga 50% untuk pembelian rank dan kredit.</p>
+                <h2 className="text-3xl font-bold">Promo Ramadhan!</h2>
+                <p className="mt-2">Di penghujung bulan Ramadhan ini, ada <b>Diskon Up To 70%</b>buat semua rank di <b>Store AlwiNation!</b>.</p>
+                <p className="mt-2">Promo berlaku dari <b>20 Maret 2025 - 31 Maret 2025</b>, jadi ini kesempatan terbaik buat kalian untuk upgrade rank dengan harga spesial</p>            
             </div>
             
             {/* Daftar Item Populer */}
