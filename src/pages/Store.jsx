@@ -1,48 +1,42 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Store = () => {
+function Store() {
     return (
-        <div className="container mx-auto p-6 text-center">
+        <div className="min-h-screen bg-gray-900 text-white py-10 px-5 md:px-20">
             {/* Banner Promosi */}
-            <div className="bg-blue-600 text-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold">Promo Ramadhan!</h2>
-                <p className="mt-2">Di penghujung bulan Ramadhan ini, ada <b>Diskon Up To 70%</b>buat semua rank di <b>Store AlwiNation!</b>.</p>
-                <p className="mt-2">Promo berlaku dari <b>20 Maret 2025 - 31 Maret 2025</b>, jadi ini kesempatan terbaik buat kalian untuk upgrade rank dengan harga spesial</p>            
+            <div className="bg-gradient-to-r from-green-500 to-blue-600 text-center py-10 rounded-lg shadow-lg">
+                <h1 className="text-4xl font-bold">Minecraft Store</h1>
+                <p className="mt-3 text-lg">Dapatkan item eksklusif, rank, dan kredit dengan promo terbaru!</p>
             </div>
-            
-            {/* Daftar Item Populer 
+
+            {/* Promo Terbaru 
             <div className="mt-10">
-                <h3 className="text-2xl font-semibold mb-4">Item Populer</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg">
-                        <h4 className="text-xl font-bold">Rank VIP</h4>
-                        <p className="mt-2">Keuntungan eksklusif di server!</p>
+                <h2 className="text-2xl font-semibold mb-5">Promo Terbaru</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <h3 className="text-xl font-bold">Rank VIP</h3>
+                        <p className="mt-2">Dapatkan akses eksklusif dengan harga spesial!</p>
                     </div>
-                    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg">
-                        <h4 className="text-xl font-bold">Rank MVP</h4>
-                        <p className="mt-2">Lebih banyak fitur premium!</p>
+                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <h3 className="text-xl font-bold">Coin Bonus</h3>
+                        <p className="mt-2">Beli 1000 kredit, dapat tambahan 200 kredit gratis!</p>
                     </div>
-                    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg">
-                        <h4 className="text-xl font-bold">500 Kredit</h4>
-                        <p className="mt-2">Gunakan untuk membeli item eksklusif!</p>
+                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <h3 className="text-xl font-bold">Bundle Spesial</h3>
+                        <p className="mt-2">Dapatkan paket lengkap item dengan harga diskon!</p>
                     </div>
                 </div>
-            </div> 
+            </div>
             */}
-            
-            {/* Tombol Redirect ke Store */}
-            <div className="mt-10">
-                <a 
-                    href="https://store.alwination.id" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-600"
-                >
-                    Kunjungi Store
-                </a>
+            {/* Tombol Redirect */}
+            <div className="text-center mt-10">
+                <Link to="https://your-store-link.com" target="_blank" rel="noopener noreferrer" className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold text-lg shadow-lg transition duration-300">
+                    Kunjungi Store Sekarang
+                </Link>
             </div>
         </div>
     );
-};
+}
 
 export default Store;
