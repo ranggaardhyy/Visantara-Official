@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const cors = require('cors');
 
 const app = express();
@@ -23,29 +25,63 @@ db.connect(err => {
     console.log('Connected to MySQL database');
 });
 
-// Tambahan route untuk root
-app.get("/", (req, res) => {
-    res.send("API Server berjalan!");
-});
+// Secret key JWT
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
-// Endpoint untuk login
+// 🔹 LOGIN ADMIN
 app.post('/login', (req, res) => {
-    const { username, platform } = req.body;
+    const { username, password } = req.body;
 
-    if (!username || !platform) {
-        return res.status(400).json({ message: "Username dan platform harus diisi" });
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username dan password harus diisi" });
     }
 
-    const query = "SELECT * FROM players WHERE username = ? AND platform = ?";
-    db.query(query, [username, platform], (err, results) => {
+    const query = "SELECT * FROM users WHERE username = ? AND role = 'admin'";
+    db.query(query, [username], async (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
 
-        if (results.length > 0) {
-            res.json({ message: "Login berhasil", player: results[0] });
-        } else {
-            res.status(401).json({ message: "Player tidak ditemukan" });
+        if (results.length === 0) {
+            return res.status(401).json({ message: "Akun admin tidak ditemukan" });
         }
+
+        const user = results[0];
+
+        // Cek password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "Password salah" });
+        }
+
+        // Buat token JWT untuk sesi login
+        const token = jwt.sign({ id: user.id, username: user.username, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+
+        res.json({ message: "Login berhasil", token });
     });
+});
+
+// 🔹 Middleware untuk Admin
+const verifyToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        return res.status(403).json({ message: "Token tidak disediakan" });
+    }
+
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: "Token tidak valid" });
+        }
+        req.user = decoded;
+        next();
+    });
+};
+
+// 🔹 Halaman Admin (Hanya Bisa diakses oleh Admin)
+app.get('/admin', verifyToken, (req, res) => {
+    if (req.user.role !== "admin") {
+        return res.status(403).json({ message: "Akses ditolak, hanya admin yang bisa mengakses!" });
+    }
+    res.json({ message: "Selamat datang di panel admin!", user: req.user });
 });
 
 // Jalankan server

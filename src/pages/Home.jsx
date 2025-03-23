@@ -1,191 +1,142 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import DOMPurify from "dompurify"; // Untuk membersihkan input
 import ServerStatus from "../components/ServerStatus";
-import { FaUsers, FaCogs, FaGlobe } from "react-icons/fa";
+import AnnouncementList from "../components/AnnouncementList";
 
 const Home = () => {
-  // Style Objects
-  const mainContainerStyle = {
-    backgroundColor: "#1a202c", // bg-gray-900
-    color: "#ffffff",
-    minHeight: "100vh",
-  };
+  const [announcements, setAnnouncements] = useState([]);
 
-  // Hero Section Styles
-  const heroSectionStyle = {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
-    textAlign: "center",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundImage: "url('/images/minecraft-bg.jpg')",
-  };
+  useEffect(() => {
+    // Data statis bisa diganti dengan data dari API backend
+    const fetchAnnouncements = async () => {
+      try {
+        const response = await fetch("/api/announcements", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-  const heroOverlayStyle = {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    borderRadius: "8px",
-  };
+        if (!response.ok) {
+          throw new Error("Gagal mengambil data pengumuman");
+        }
 
-  const heroContentStyle = {
-    position: "relative",
-    zIndex: 1,
-    padding: "2rem",
-    maxWidth: "600px",
-    margin: "0 auto",
-    borderRadius: "8px",
-  };
+        const data = await response.json();
+        // Mencegah XSS dengan membersihkan data sebelum disimpan di state
+        const sanitizedData = data.map((item) => ({
+          id: item.id,
+          title: DOMPurify.sanitize(item.title),
+          content: DOMPurify.sanitize(item.content),
+          image: item.image,
+        }));
 
-  const heroTitleStyle = {
-    fontSize: "3rem",
-    fontWeight: "800",
-    marginBottom: "1rem",
-    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-  };
+        setAnnouncements(sanitizedData);
+      } catch (error) {
+        console.error("Error fetching announcements:", error);
+      }
+    };
 
-  const heroTextStyle = {
-    fontSize: "1.125rem",
-    opacity: 0.9,
-    marginBottom: "1.5rem",
-  };
+    fetchAnnouncements();
+  }, []);
 
-  const buttonStyle = {
-    marginTop: "1.5rem",
-    padding: "0.75rem 2rem",
-    backgroundColor: "#48bb78", // green-500
-    border: "none",
-    borderRadius: "0.5rem",
-    color: "#fff",
-    fontWeight: "600",
-    fontSize: "1.125rem",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-  };
-
-  // Server Status Section Styles
-  const serverStatusSectionStyle = {
-    padding: "4rem 0",
-    backgroundColor: "#2d3748", // bg-gray-800
-    textAlign: "center",
-  };
-
-  const statusContainerStyle = {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "0 1.5rem",
-  };
-
-  // Feature Section Styles
-  const featureSectionStyle = {
-    padding: "4rem 0",
-    backgroundColor: "#1a202c", // bg-gray-900
-    textAlign: "center",
-  };
-
-  const featureContainerStyle = {
-    maxWidth: "1200px",
-    margin: "0 auto",
-    padding: "0 1.5rem",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "2rem",
-  };
-
-  const featureItemStyle = {
-    padding: "1.5rem",
-    backgroundColor: "#2d3748", // bg-gray-800
-    borderRadius: "0.5rem",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    textAlign: "center",
-    transition: "transform 0.3s ease",
-  };
-
-  const featureIconStyle = {
-    color: "#68d391", // text-green-400
-    fontSize: "2.5rem",
-    marginBottom: "1rem",
-  };
-
-  const featureTitleStyle = {
-    fontSize: "1.25rem",
-    fontWeight: "600",
-    marginBottom: "0.5rem",
-  };
-
-  const featureTextStyle = {
-    opacity: 0.9,
+  const styles = {
+    container: { padding: "20px", textAlign: "center" },
+    heroSection: {
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100vh",
+      textAlign: "center",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundImage: "url('/assets/images/mineforge-banner.jpg')",
+    },
+    heroOverlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+    },
+    heroContent: {
+      position: "relative",
+      zIndex: 1,
+      padding: "2rem",
+      maxWidth: "600px",
+      margin: "0 auto",
+      color: "#fff",
+    },
+    heroTitle: {
+      fontSize: "3rem",
+      fontWeight: "800",
+      marginBottom: "1rem",
+      textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+    },
+    heroText: {
+      fontSize: "1.2rem",
+      fontWeight: "400",
+      marginBottom: "1.5rem",
+    },
+    announcementSection: {
+      marginTop: "40px",
+      padding: "20px",
+      backgroundColor: "rgba(255, 255, 255, 0.05)", // ⬅️ Warna gelap transparan
+      borderRadius: "10px",
+      border: "1px solid rgba(255, 255, 255, 0.2)", // ⬅️ Border transparan agar tetap terstruktur
+      color: "#fff", // ⬅️ Teks tetap putih agar terlihat jelas
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // ⬅️ Efek bayangan agar lebih elegan
+      backdropFilter: "blur(6px)", // ⬅️ Efek blur agar lebih modern
+    },
+    button: {
+      marginTop: "1.5rem",
+      padding: "12px 24px",
+      backgroundColor: "#ffcc00",
+      border: "none",
+      borderRadius: "6px",
+      color: "#000",
+      fontWeight: "600",
+      fontSize: "1.125rem",
+      cursor: "pointer",
+      transition: "background-color 0.3s ease, transform 0.2s ease-in-out",
+    },
   };
 
   return (
-    <div style={mainContainerStyle}>
-      {/* Hero Section */}
-      <section style={heroSectionStyle}>
-        <div style={heroOverlayStyle}></div>
-        <div style={heroContentStyle}>
-          <h1 style={heroTitleStyle}>Selamat Datang di AlwiNation SMP</h1>
-          <p style={heroTextStyle}>Server Minecraft terbaik untuk komunitas!</p>
-          <Link to="/dashboard">
-            <button style={buttonStyle}>Gabung Sekarang</button>
-          </Link>
-        </div>
-      </section>
+    <div style={styles.container}>
+      <motion.section
+        style={styles.heroSection}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <div style={styles.heroOverlay}></div>
+        <ServerStatus />
 
-      {/* Server Status Section */}
-      <section style={serverStatusSectionStyle}>
-        <div style={statusContainerStyle}>
-          <h3 style={{ fontSize: "1.875rem", fontWeight: "600" }}>
-            Server Status
-          </h3>
-          <ServerStatus />
-        </div>
-      </section>
+        <motion.div
+          style={styles.heroContent}
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h1 style={styles.heroTitle}>Selamat Datang di AlwiNation</h1>
+          <p style={styles.heroText}>
+            Server Minecraft terbaik untuk komunitas! Bergabung dan jadilah bagian dari petualangan seru bersama teman-teman.
+          </p>
+          <p style={styles.heroText}>
+            Bangun, bertahan, dan eksplorasi dunia tanpa batas di AlwiNation!
+          </p>
+        </motion.div>
+      </motion.section>
 
-      {/* Feature Section */}
-      <section style={featureSectionStyle}>
-        <div style={statusContainerStyle}>
-          <h3
-            style={{
-              fontSize: "1.875rem",
-              fontWeight: "600",
-              marginBottom: "2rem",
-              color: "#68d391",
-            }}
-          >
-            Kenapa Main di AlwiNation?
-          </h3>
-          <div style={featureContainerStyle}>
-            <div style={featureItemStyle}>
-              <FaGlobe style={featureIconStyle} />
-              <h4 style={featureTitleStyle}>Survival Mode</h4>
-              <p style={featureTextStyle}>
-                Jelajahi dunia tanpa batas dengan teman-temanmu!
-              </p>
-            </div>
-            <div style={featureItemStyle}>
-              <FaCogs style={featureIconStyle} />
-              <h4 style={featureTitleStyle}>Custom Plugins</h4>
-              <p style={featureTextStyle}>
-                Pengalaman unik dengan fitur eksklusif.
-              </p>
-            </div>
-            <div style={featureItemStyle}>
-              <FaUsers style={featureIconStyle} />
-              <h4 style={featureTitleStyle}>Komunitas Aktif</h4>
-              <p style={featureTextStyle}>
-                Bergabung dengan ratusan pemain setiap hari.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Bagian Pengumuman */}
+      <div style={styles.announcementSection}>
+        <h2>📢 Pengumuman Terbaru</h2>
+        <AnnouncementList announcements={announcements} />
+      </div>
     </div>
   );
 };

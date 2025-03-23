@@ -51,14 +51,14 @@ function Store() {
     <div style={containerStyle}>
       {/* Banner Promosi */}
       <div style={bannerStyle}>
-        <h1 style={bannerTitleStyle}>Minecraft Store</h1>
+        <h1 style={bannerTitleStyle}>AlwiNation Store</h1>
         <p style={bannerTextStyle}>
           Dapatkan item eksklusif, rank, dan kredit dengan promo terbaru!
         </p>
       </div>
 
       {/* Promo Terbaru (bagian ini dikomentari jika tidak digunakan) */}
-      {/*
+      
       <div style={{ marginTop: "2.5rem" }}>
         <h2 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1.25rem" }}>
           Promo Terbaru
@@ -78,7 +78,7 @@ function Store() {
           </div>
         </div>
       </div>
-      */}
+      
 
       {/* Tombol Redirect */}
       <div style={buttonContainerStyle}>
