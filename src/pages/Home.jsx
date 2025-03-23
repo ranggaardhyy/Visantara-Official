@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import DOMPurify from "dompurify"; // Untuk membersihkan input
+import DOMPurify from "dompurify"; 
 import ServerStatus from "../components/ServerStatus";
 import AnnouncementList from "../components/AnnouncementList";
 
@@ -12,26 +12,16 @@ const Home = () => {
     // Data statis bisa diganti dengan data dari API backend
     const fetchAnnouncements = async () => {
       try {
-        const response = await fetch("/api/announcements", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Gagal mengambil data pengumuman");
-        }
+        const response = await fetch("/api/announcements");
+        if (!response.ok) throw new Error("Gagal mengambil data pengumuman");
 
         const data = await response.json();
-        // Mencegah XSS dengan membersihkan data sebelum disimpan di state
         const sanitizedData = data.map((item) => ({
           id: item.id,
           title: DOMPurify.sanitize(item.title),
           content: DOMPurify.sanitize(item.content),
           image: item.image,
         }));
-
         setAnnouncements(sanitizedData);
       } catch (error) {
         console.error("Error fetching announcements:", error);
@@ -42,7 +32,10 @@ const Home = () => {
   }, []);
 
   const styles = {
-    container: { padding: "20px", textAlign: "center" },
+    container: {
+      marginTop: 0, // Pastikan tidak ada jarak antara navbar & hero
+      padding: "0",
+    },
     heroSection: {
       position: "relative",
       display: "flex",
@@ -52,7 +45,8 @@ const Home = () => {
       textAlign: "center",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      backgroundImage: "url('/assets/images/mineforge-banner.jpg')",
+      // Ganti background di sini agar menyatu dengan navbar
+      backgroundImage: "url('/assets/images/dark-bg.jpg')", 
     },
     heroOverlay: {
       position: "absolute",
@@ -84,12 +78,12 @@ const Home = () => {
     announcementSection: {
       marginTop: "40px",
       padding: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.05)", // ⬅️ Warna gelap transparan
+      backgroundColor: "rgba(255, 255, 255, 0.05)",
       borderRadius: "10px",
-      border: "1px solid rgba(255, 255, 255, 0.2)", // ⬅️ Border transparan agar tetap terstruktur
-      color: "#fff", // ⬅️ Teks tetap putih agar terlihat jelas
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // ⬅️ Efek bayangan agar lebih elegan
-      backdropFilter: "blur(6px)", // ⬅️ Efek blur agar lebih modern
+      border: "1px solid rgba(255, 255, 255, 0.2)",
+      color: "#fff",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+      backdropFilter: "blur(6px)",
     },
     button: {
       marginTop: "1.5rem",
@@ -115,7 +109,6 @@ const Home = () => {
       >
         <div style={styles.heroOverlay}></div>
         <ServerStatus />
-
         <motion.div
           style={styles.heroContent}
           initial={{ y: -20 }}
