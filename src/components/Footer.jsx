@@ -112,7 +112,11 @@ const Footer = () => {
           <p style={styles.text}>
             Check out our store to purchase ranks, crate keys, and more!
           </p>
-          <motion.button style={styles.shopButton} whileHover={{ scale: 1.05 }}>
+          <motion.button
+            style={styles.shopButton}
+            whileHover={{ scale: 1.05 }}
+            onClick={() => window.open("https://store.alwination.id", "_blank")}
+          >
             Shop Now <FaShoppingCart style={{ marginLeft: "5px" }} />
           </motion.button>
         </div>

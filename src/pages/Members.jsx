@@ -2,34 +2,12 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaUsers } from "react-icons/fa";
 
-/* 
-  Untuk saat ini, staffMembers dikosongkan. 
-  Di masa mendatang, data bisa dimuat dari API atau sumber lain.
-*/
-const initialStaff = []; // Data staff kosong
-const initialNewMembers = [
-  {
-    username: "PlayerTwo",
-    avatarUrl: "https://minotar.net/avatar/PlayerTwo/40.png",
-  },
-  {
-    username: "PlayerThree",
-    avatarUrl: "https://minotar.net/avatar/PlayerThree/40.png",
-  },
-  {
-    username: "Newbie123",
-    avatarUrl: "https://minotar.net/avatar/Newbie123/40.png",
-  },
-];
-
 /* Variants untuk animasi Framer Motion (staggered list) */
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { staggerChildren: 0.15 },
   },
 };
 
@@ -40,18 +18,27 @@ const itemVariants = {
 
 function Members() {
   const [staffMembers, setStaffMembers] = useState([]);
-  const [newMembers, setNewMembers] = useState([]);
-
-  // State untuk pencarian staff (meskipun saat ini staff kosong)
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Saat ini, staffMembers tetap kosong
-    setStaffMembers(initialStaff);
-    setNewMembers(initialNewMembers);
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/members");
+        if (!response.ok) throw new Error("Gagal mengambil data anggota");
+        const data = await response.json();
+        // Hanya tampilkan pengurus (role selain "member")
+        const staff = data.filter(
+          (member) => member.role.toLowerCase() !== "member"
+        );
+        setStaffMembers(staff);
+      } catch (error) {
+        console.error("Error fetching members:", error);
+      }
+    };
+
+    fetchMembers();
   }, []);
 
-  // Filter staff berdasarkan searchTerm (akan tetap kosong jika tidak ada data)
   const filteredStaff = staffMembers.filter((staff) =>
     staff.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -63,7 +50,7 @@ function Members() {
         <h2 style={styles.sidebarTitle}>Overview</h2>
         <ul style={styles.sidebarList}>
           <li style={styles.sidebarItem}>
-            <span style={styles.sidebarLinkActive}>Staff members</span>
+            <span style={styles.sidebarLinkActive}>Pengurus Server</span>
           </li>
           <li style={styles.sidebarItem}>
             <span style={styles.sidebarLink}>Registered members</span>
@@ -71,7 +58,9 @@ function Members() {
         </ul>
 
         <div style={styles.groupSection}>
-          <label htmlFor="groupSelect" style={styles.label}>View group</label>
+          <label htmlFor="groupSelect" style={styles.label}>
+            View group
+          </label>
           <select id="groupSelect" style={styles.select}>
             <option>Group...</option>
             <option>CEO</option>
@@ -79,34 +68,26 @@ function Members() {
             <option>Administrator</option>
             <option>Moderator</option>
             <option>Helper</option>
-            <option>Member</option>
           </select>
         </div>
 
         <h3 style={styles.newMembersTitle}>New members</h3>
         <div style={styles.newMembersContainer}>
-          {newMembers.map((member) => (
-            <div key={member.username} style={styles.newMemberItem}>
-              <img 
-                src={member.avatarUrl} 
-                alt={member.username} 
-                style={styles.newMemberAvatar}
-              />
-              <p style={styles.newMemberName}>{member.username}</p>
-            </div>
-          ))}
+          <p style={{ fontStyle: "italic", color: "#777", margin: "0" }}>
+            Tidak ada anggota baru
+          </p>
         </div>
       </div>
 
       {/* MAIN CONTENT */}
       <div style={styles.mainContent}>
-        <h2 style={styles.mainTitle}>Staff members</h2>
-        
+        <h2 style={styles.mainTitle}>Pengurus Server</h2>
+
         {/* Search Bar */}
         <div style={styles.searchBarContainer}>
           <input
             type="text"
-            placeholder="Search staff..."
+            placeholder="Search pengurus..."
             style={styles.searchBar}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -122,8 +103,8 @@ function Members() {
         >
           {filteredStaff.length > 0 ? (
             filteredStaff.map((staff) => (
-              <motion.div 
-                key={staff.username} 
+              <motion.div
+                key={staff.username}
                 style={styles.staffCard}
                 variants={itemVariants}
                 whileHover={{ scale: 1.03 }}
@@ -140,8 +121,8 @@ function Members() {
               </motion.div>
             ))
           ) : (
-            <p style={{ color: "#777", fontStyle: "italic" }}>
-              No staff members to display.
+            <p style={styles.emptyText}>
+              Tidak ada pengurus server untuk ditampilkan.
             </p>
           )}
         </motion.div>
@@ -153,21 +134,21 @@ function Members() {
 }
 
 const styles = {
-  /* Container utama: sidebar + main content */
   container: {
     display: "flex",
-    flexWrap: "wrap", // Responsif: jika layar sempit, sidebar akan turun
+    flexWrap: "wrap",
     backgroundColor: "#111",
     minHeight: "100vh",
     color: "#ccc",
     fontFamily: "Arial, sans-serif",
+    paddingTop: "120px", // Jarak dari navbar global (sesuaikan tinggi navbar)
   },
-  /* SIDEBAR */
   sidebar: {
     width: "250px",
     minWidth: "250px",
     backgroundColor: "#1a1a1a",
     padding: "20px",
+    paddingTop: "30px",
     borderRight: "1px solid #222",
   },
   sidebarTitle: {
@@ -179,7 +160,7 @@ const styles = {
   },
   sidebarList: {
     listStyle: "none",
-    padding: "0",
+    padding: 0,
     margin: "0 0 20px 0",
   },
   sidebarItem: {
@@ -222,28 +203,9 @@ const styles = {
     flexDirection: "column",
     gap: "10px",
   },
-  newMemberItem: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    backgroundColor: "#222",
-    padding: "8px",
-    borderRadius: "4px",
-  },
-  newMemberAvatar: {
-    width: "40px",
-    height: "40px",
-    borderRadius: "4px",
-  },
-  newMemberName: {
-    color: "#ccc",
-    margin: 0,
-    fontSize: "14px",
-  },
-  /* MAIN CONTENT */
   mainContent: {
     flex: 1,
-    minWidth: "300px", // Agar tidak terlalu kecil di layar sempit
+    minWidth: "300px",
     padding: "20px",
   },
   mainTitle: {
@@ -253,7 +215,6 @@ const styles = {
     borderBottom: "1px solid #333",
     paddingBottom: "5px",
   },
-  /* Search Bar */
   searchBarContainer: {
     marginBottom: "20px",
   },
@@ -300,6 +261,12 @@ const styles = {
     color: "#ccc",
     margin: 0,
     fontSize: "14px",
+  },
+  emptyText: {
+    color: "#777",
+    fontStyle: "italic",
+    width: "100%",
+    textAlign: "center",
   },
   viewAllButton: {
     marginTop: "20px",

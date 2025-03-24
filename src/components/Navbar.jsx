@@ -9,7 +9,6 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import logo from "../assets/images/logo.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,44 +20,33 @@ function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <nav style={styles.navbar}>
-      {/* Logo */}
-      <div style={styles.logoContainer}>
-        <img src={logo} alt="Logo" style={styles.logo} />
-      </div>
-
-      {/* Desktop Links */}
+      {/* Desktop Navigation - Urutan: Home, Rules, Discord, Store, Vote */}
       {!isMobile && (
         <div style={styles.navCenter}>
-          <div style={styles.navLeft}>
-            <Link to="/" style={styles.navLink}>
-              <FaHome style={styles.icon} /> Home
-            </Link>
-            <Link to="/rules" style={styles.navLink}>
-              <FaBook style={styles.icon} /> Rules
-            </Link>
-          </div>
-          <div style={styles.navRight}>
-            <Link to="/store" style={styles.navLink}>
-              <FaShoppingCart style={styles.icon} /> Store
-            </Link>
-            <Link to="/vote" style={styles.navLink}>
-              <FaPoll style={styles.icon} /> Vote
-            </Link>
-            <a
-              href="https://discord.gg/alwination"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.discordButton}
-            >
-              <FaDiscord style={styles.icon} /> Discord
-            </a>
-          </div>
+          <Link to="/" style={styles.navLink}>
+            <FaHome style={styles.icon} /> Home
+          </Link>
+          <Link to="/rules" style={styles.navLink}>
+            <FaBook style={styles.icon} /> Rules
+          </Link>
+          <a
+            href="https://discord.gg/alwination"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.discordButton}
+          >
+            <FaDiscord style={styles.icon} /> Discord
+          </a>
+          <Link to="/store" style={styles.navLink}>
+            <FaShoppingCart style={styles.icon} /> Store
+          </Link>
+          <Link to="/vote" style={styles.navLink}>
+            <FaPoll style={styles.icon} /> Vote
+          </Link>
         </div>
       )}
 
@@ -68,7 +56,13 @@ function Navbar() {
           <button style={styles.menuButton} onClick={toggleMenu}>
             <FaBars />
           </button>
-          <div style={{ ...styles.mobileMenu, left: menuOpen ? "0" : "-70%" }}>
+
+          <div
+            style={{
+              ...styles.mobileMenu,
+              right: menuOpen ? "0" : "-70%",
+            }}
+          >
             <button style={styles.closeButton} onClick={toggleMenu}>
               <FaTimes />
             </button>
@@ -77,12 +71,6 @@ function Navbar() {
             </Link>
             <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
               <FaBook style={styles.icon} /> Rules
-            </Link>
-            <Link to="/store" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaShoppingCart style={styles.icon} /> Store
-            </Link>
-            <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaPoll style={styles.icon} /> Vote
             </Link>
             <a
               href="https://discord.gg/alwination"
@@ -93,6 +81,12 @@ function Navbar() {
             >
               <FaDiscord style={styles.icon} /> Discord
             </a>
+            <Link to="/store" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <FaShoppingCart style={styles.icon} /> Store
+            </Link>
+            <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <FaPoll style={styles.icon} /> Vote
+            </Link>
           </div>
         </>
       )}
@@ -102,42 +96,21 @@ function Navbar() {
 
 const styles = {
   navbar: {
-    position: "absolute", // Agar menempel di atas hero
+    position: "absolute",
     top: 0,
     left: 0,
-    right: 0,    // Pastikan menempel hingga sisi kanan
+    right: 0,
     zIndex: 10,
     display: "flex",
     alignItems: "center",
-    padding: "10px 20px", // Kurangi padding jika perlu
+    justifyContent: "center",
+    padding: "10px 20px",
     background: "transparent",
   },
-  logoContainer: {
-    display: "flex",
-    alignItems: "center",
-  },
-  logo: {
-    width: "100px",
-    height: "auto",
-    maxWidth: "100%", // Pastikan tidak melebihi layar
-  },
   navCenter: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginLeft: "20px",
-  },
-  navLeft: {
-    display: "flex",
-    gap: "20px",
-  },
-  navRight: {
     display: "flex",
     gap: "20px",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginLeft: "auto",
   },
   navLink: {
     color: "#ffffff",
@@ -178,14 +151,14 @@ const styles = {
   mobileMenu: {
     position: "fixed",
     top: 0,
-    left: "-70%",
+    right: "-70%",
     width: "70%",
     height: "100vh",
     backgroundColor: "rgba(0,0,0,0.95)",
     display: "flex",
     flexDirection: "column",
     paddingTop: "60px",
-    transition: "left 0.3s ease-in-out",
+    transition: "right 0.3s ease-in-out",
     zIndex: 9999,
   },
   closeButton: {
@@ -204,16 +177,22 @@ const styles = {
     fontWeight: "bold",
     padding: "15px 20px",
     borderBottom: "1px solid #444",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
   },
   mobileDiscordButton: {
     backgroundColor: "#5865F2",
     color: "#ffffff",
-    textDecoration: "none",
     fontSize: "18px",
     fontWeight: "bold",
     padding: "15px 20px",
-    textAlign: "center",
-    marginTop: "auto",
+    textAlign: "left",
+    textDecoration: "none",
+    borderBottom: "1px solid #444",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
   },
 };
 

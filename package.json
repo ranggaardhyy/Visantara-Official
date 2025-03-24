@@ -12,6 +12,7 @@
         "react-helmet-async": "^2.0.5",
         "react-icons": "^5.5.0",
         "react-router-dom": "^6.30.0",
+        "react-tsparticles": "^2.12.2",
         "uid-safe": "^2.1.5"
     },
     "scripts": {
