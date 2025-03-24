@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
 import Store from "./pages/Store";
 import Vote from "./pages/Vote";
 import NotFound from "./pages/NotFound";
@@ -20,7 +19,6 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/store" element={<Store />} />
                 <Route path="/vote" element={<Vote />} />
                 <Route path="/admin" element={<AdminDashboard />} />

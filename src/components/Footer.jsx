@@ -6,8 +6,9 @@ import {
   FaFileContract,
   FaUsers,
   FaCookieBite,
+  FaTimes,
 } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 
 const Footer = () => {
@@ -23,6 +24,10 @@ const Footer = () => {
 
   const handleAdminClick = () => {
     setShowLogin(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowLogin(false);
   };
 
   const handleLogin = async () => {
@@ -61,7 +66,7 @@ const Footer = () => {
         {/* Play Now Section */}
         <div style={styles.section}>
           <h3 style={styles.title}>
-            Play Now <span style={styles.highlight}>=</span>
+            Play Now <span style={styles.highlight}>-</span>
           </h3>
           <p style={styles.text}>
             Start your journey today! Join the server now to play the best bedwars, skywars, and more!
@@ -74,7 +79,7 @@ const Footer = () => {
         {/* Links Section */}
         <div style={styles.section}>
           <h3 style={styles.title}>
-            Links <span style={styles.highlight}>=</span>
+            Links <span style={styles.highlight}>-</span>
           </h3>
           <ul style={styles.list}>
             <motion.li style={styles.listItem} whileHover={{ scale: 1.05 }}>
@@ -107,7 +112,7 @@ const Footer = () => {
         {/* Store Section */}
         <div style={styles.section}>
           <h3 style={styles.title}>
-            Store <span style={styles.highlight}>=</span>
+            Store <span style={styles.highlight}>-</span>
           </h3>
           <p style={styles.text}>
             Check out our store to purchase ranks, crate keys, and more!
@@ -133,33 +138,39 @@ const Footer = () => {
       </div>
 
       {/* Login Popup */}
-      {showLogin && (
-        <motion.div
-          style={styles.popup}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <h3>Login Admin</h3>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={handleInputChange}
-            style={styles.input}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleInputChange}
-            style={styles.input}
-          />
-          <button onClick={handleLogin} style={styles.button}>
-            Login
-          </button>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {showLogin && (
+          <motion.div
+            style={styles.popup}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <button style={styles.closePopupButton} onClick={handleClosePopup}>
+              <FaTimes />
+            </button>
+            <h3 style={styles.popupTitle}>Login Admin</h3>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={handleInputChange}
+              style={styles.input}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleInputChange}
+              style={styles.input}
+            />
+            <button onClick={handleLogin} style={styles.button}>
+              Login
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Pop-up Message */}
       {popupMessage && (
@@ -195,21 +206,22 @@ const styles = {
     padding: "50px 20px",
     textAlign: "center",
     fontFamily: "Arial, sans-serif",
+    position: "relative",
   },
   container: {
     display: "flex",
-    flexDirection: "row",      // Tiga kolom
+    flexDirection: "row", // Tiga kolom
     justifyContent: "space-between",
     alignItems: "flex-start",
     maxWidth: "1200px",
     margin: "0 auto",
-    flexWrap: "wrap",          // Agar responsif saat layar mengecil
+    flexWrap: "wrap", // Agar responsif saat layar mengecil
   },
   section: {
-    width: "30%",              // Setiap kolom ~30%
+    width: "30%", // Setiap kolom ~30%
     minWidth: "250px",
     marginBottom: "30px",
-    textAlign: "left",         // Rata kiri agar terlihat lebih rapi
+    textAlign: "left", // Rata kiri agar terlihat lebih rapi
   },
   title: {
     fontSize: "20px",
@@ -292,28 +304,50 @@ const styles = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    backgroundColor: "#fff",
-    padding: "20px",
+    backgroundColor: "#222",
+    padding: "30px",
     borderRadius: "10px",
-    boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
+    boxShadow: "0px 8px 16px rgba(0,0,0,0.5)",
     textAlign: "center",
-    zIndex: 999,
+    zIndex: 9999,
+    width: "90%",
+    maxWidth: "400px",
+    color: "#fff",
+  },
+  closePopupButton: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    background: "none",
+    border: "none",
+    color: "#fff",
+    fontSize: "1.5rem",
+    cursor: "pointer",
+  },
+  popupTitle: {
+    marginBottom: "20px",
+    fontSize: "22px",
+    fontWeight: "bold",
   },
   input: {
     display: "block",
     width: "100%",
-    margin: "10px 0",
-    padding: "8px",
-    border: "1px solid #ccc",
+    margin: "12px 0",
+    padding: "10px",
+    border: "1px solid #444",
     borderRadius: "5px",
+    backgroundColor: "#333",
+    color: "#fff",
   },
   button: {
-    backgroundColor: "#28a745",
-    color: "#fff",
+    backgroundColor: "#ffcc00",
+    color: "#111",
     padding: "10px 15px",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
+    fontWeight: "bold",
+    marginTop: "10px",
   },
   popupMessage: {
     position: "fixed",

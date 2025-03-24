@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   FaHome,
   FaBook,
@@ -22,31 +23,52 @@ function Navbar() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  // Animasi dasar untuk setiap nav item
+  const navItemVariants = {
+    hover: { scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" },
+  };
+
   return (
     <nav style={styles.navbar}>
-      {/* Desktop Navigation - Urutan: Home, Rules, Discord, Store, Vote */}
+      {/* Desktop Navigation */}
       {!isMobile && (
         <div style={styles.navCenter}>
-          <Link to="/" style={styles.navLink}>
-            <FaHome style={styles.icon} /> Home
-          </Link>
-          <Link to="/rules" style={styles.navLink}>
-            <FaBook style={styles.icon} /> Rules
-          </Link>
-          <a
-            href="https://discord.gg/alwination"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={styles.discordButton}
-          >
-            <FaDiscord style={styles.icon} /> Discord
-          </a>
-          <Link to="/store" style={styles.navLink}>
-            <FaShoppingCart style={styles.icon} /> Store
-          </Link>
-          <Link to="/vote" style={styles.navLink}>
-            <FaPoll style={styles.icon} /> Vote
-          </Link>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/" style={styles.navLink}>
+              <FaHome style={styles.icon} /> Home
+            </Link>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/rules" style={styles.navLink}>
+              <FaBook style={styles.icon} /> Rules
+            </Link>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <a
+              href="https://discord.gg/alwination"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.discordButton}
+            >
+              <FaDiscord style={styles.icon} /> Discord
+            </a>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            {/* Store diarahkan ke webstore eksternal */}
+            <a
+              href="https://store.alwination.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.navLink}
+            >
+              <FaShoppingCart style={styles.icon} /> Store
+            </a>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/vote" style={styles.navLink}>
+              <FaPoll style={styles.icon} /> Vote
+            </Link>
+          </motion.div>
         </div>
       )}
 
@@ -66,27 +88,43 @@ function Navbar() {
             <button style={styles.closeButton} onClick={toggleMenu}>
               <FaTimes />
             </button>
-            <Link to="/" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaHome style={styles.icon} /> Home
-            </Link>
-            <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaBook style={styles.icon} /> Rules
-            </Link>
-            <a
-              href="https://discord.gg/alwination"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.mobileDiscordButton}
-              onClick={toggleMenu}
-            >
-              <FaDiscord style={styles.icon} /> Discord
-            </a>
-            <Link to="/store" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaShoppingCart style={styles.icon} /> Store
-            </Link>
-            <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaPoll style={styles.icon} /> Vote
-            </Link>
+            <motion.div variants={navItemVariants} whileHover="hover">
+              <Link to="/" style={styles.mobileNavLink} onClick={toggleMenu}>
+                <FaHome style={styles.icon} /> Home
+              </Link>
+            </motion.div>
+            <motion.div variants={navItemVariants} whileHover="hover">
+              <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
+                <FaBook style={styles.icon} /> Rules
+              </Link>
+            </motion.div>
+            <motion.div variants={navItemVariants} whileHover="hover">
+              <a
+                href="https://discord.gg/alwination"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={styles.mobileDiscordButton}
+                onClick={toggleMenu}
+              >
+                <FaDiscord style={styles.icon} /> Discord
+              </a>
+            </motion.div>
+            <motion.div variants={navItemVariants} whileHover="hover">
+              <a
+                href="https://store.alwination.id"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={styles.mobileNavLink}
+                onClick={toggleMenu}
+              >
+                <FaShoppingCart style={styles.icon} /> Store
+              </a>
+            </motion.div>
+            <motion.div variants={navItemVariants} whileHover="hover">
+              <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
+                <FaPoll style={styles.icon} /> Vote
+              </Link>
+            </motion.div>
           </div>
         </>
       )}

@@ -1,85 +1,104 @@
-import React from "react";
+// src/components/AnnouncementItem.jsx
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const AnnouncementItem = ({ announcement, onEdit, onDelete }) => {
+const AnnouncementItem = ({ announcement }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const containerStyle = {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row", // kolom untuk mobile, baris untuk desktop
+    backgroundColor: "#222",
+    borderRadius: "8px",
+    overflow: "hidden",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+    marginBottom: "20px",
+  };
+
+  const imageContainerStyle = {
+    flex: isMobile ? "0 0 auto" : "0 0 40%",
+    width: isMobile ? "100%" : "auto",
+    backgroundColor: "#333",
+  };
+
+  const imageStyle = {
+    width: "100%",
+    height: isMobile ? "auto" : "100%",
+    objectFit: "cover",
+  };
+
+  const placeholderStyle = {
+    width: "100%",
+    height: "100%",
+    minHeight: isMobile ? "200px" : "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#444",
+    color: "#ccc",
+    fontSize: "14px",
+  };
+
+  const contentStyle = {
+    flex: "1",
+    padding: "16px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  };
+
+  const titleStyle = {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: "8px",
+  };
+
+  const textStyle = {
+    fontSize: "1rem",
+    color: "#ccc",
+    marginBottom: "8px",
+  };
+
+  const infoStyle = {
+    fontSize: "0.9rem",
+    color: "#aaa",
+  };
+
   return (
     <motion.div
-      style={styles.card}
+      style={containerStyle}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <h3 style={styles.title}>{announcement.title}</h3>
-      <p style={styles.content}>{announcement.content}</p>
-      {announcement.image && (
-        <img
-          src={announcement.image}
-          alt={announcement.title}
-          style={styles.image}
-        />
-      )}
-      {/* Tombol untuk Admin (edit & delete) */}
-      {onEdit && onDelete && (
-        <div style={styles.buttonGroup}>
-          <button style={styles.editButton} onClick={() => onEdit(announcement)}>
-            Edit
-          </button>
-          <button style={styles.deleteButton} onClick={() => onDelete(announcement.id)}>
-            Hapus
-          </button>
+      <div style={imageContainerStyle}>
+        {announcement.image ? (
+          <img src={announcement.image} alt="Announcement" style={imageStyle} />
+        ) : (
+          <div style={placeholderStyle}>No Image</div>
+        )}
+      </div>
+      <div style={contentStyle}>
+        <div>
+          <div style={titleStyle}>{announcement.title}</div>
+          <div style={textStyle}>{announcement.content}</div>
         </div>
-      )}
+        <div style={infoStyle}>
+          {announcement.created_by} |{" "}
+          {announcement.created_at
+            ? new Date(announcement.created_at).toLocaleString()
+            : "Unknown Date"}
+        </div>
+      </div>
     </motion.div>
   );
-};
-
-const styles = {
-  card: {
-    backgroundColor: "#fff",
-    padding: "15px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
-    marginBottom: "20px",
-  },
-  title: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    margin: "0 0 10px",
-    color: "#333",
-  },
-  content: {
-    fontSize: "14px",
-    margin: "0 0 10px",
-    color: "#555",
-  },
-  image: {
-    maxWidth: "100%",
-    height: "auto",
-    marginBottom: "10px",
-    borderRadius: "4px",
-  },
-  buttonGroup: {
-    display: "flex",
-    gap: "10px",
-  },
-  editButton: {
-    backgroundColor: "#ffc107",
-    border: "none",
-    padding: "6px 12px",
-    borderRadius: "4px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
-  deleteButton: {
-    backgroundColor: "#dc3545",
-    border: "none",
-    padding: "6px 12px",
-    borderRadius: "4px",
-    color: "#fff",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
 };
 
 export default AnnouncementItem;
