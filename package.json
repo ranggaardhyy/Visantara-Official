@@ -17,6 +17,7 @@
     },
     "scripts": {
         "start": "vite",
+        "prebuild": "rm -rf node_modules && npm install",
         "build": "vite build",
         "dev": "vite"
     },
