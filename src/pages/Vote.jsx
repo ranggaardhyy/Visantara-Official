@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaCopy } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import Footer from "../components/Footer";
 
 const Vote = () => {
   const voteLink = "https://minecraft-mp.com/server/339723/vote/";
@@ -107,7 +106,6 @@ const Vote = () => {
           </AnimatePresence>
         </motion.div>
       </motion.div>
-      <Footer />
     </div>
   );
 };

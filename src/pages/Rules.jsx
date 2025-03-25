@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { FaListOl } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import Footer from "../components/Footer";
 
 const Rules = () => {
   const styles = {
@@ -144,7 +143,6 @@ const Rules = () => {
             </motion.ul>
         </div>
         </motion.div>
-      <Footer />
     </div>
   );
 };
