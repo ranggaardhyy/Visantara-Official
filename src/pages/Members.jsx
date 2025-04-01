@@ -283,14 +283,6 @@ function Members() {
       {/* SIDEBAR */}
       <div style={styles.sidebar}>
         <h2 style={styles.sidebarTitle}>Overview</h2>
-        <ul style={styles.sidebarList}>
-          <li style={styles.sidebarItem}>
-            <span style={styles.sidebarLinkActive}>Pengurus Server</span>
-          </li>
-          <li style={styles.sidebarItem}>
-            <span style={styles.sidebarLink}>Registered members</span>
-          </li>
-        </ul>
         <div style={styles.groupSection}>
           <label htmlFor="groupSelect" style={styles.label}>
             View group
@@ -378,7 +370,6 @@ function Members() {
 }
 
 const styles = {
-
   container: {
     display: "flex",
     flexWrap: "wrap",
@@ -522,6 +513,50 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
     transition: "background-color 0.2s, transform 0.2s",
+  },
+
+  // Media Query untuk mobile
+  '@media (max-width: 768px)': {
+    container: {
+      flexDirection: "column",
+    },
+    sidebar: {
+      width: "100%",
+      padding: "15px",
+      borderRight: "none",
+    },
+    mainContent: {
+      padding: "15px",
+    },
+    sidebarTitle: {
+      fontSize: "16px",
+    },
+    sidebarList: {
+      padding: "10px 0",
+    },
+    searchBar: {
+      padding: "8px",
+      fontSize: "14px",
+    },
+    staffCard: {
+      width: "100%",
+      padding: "10px",
+      gap: "8px",
+    },
+    staffAvatar: {
+      width: "40px",
+      height: "40px",
+    },
+    staffRole: {
+      fontSize: "11px",
+    },
+    staffName: {
+      fontSize: "12px",
+    },
+    viewAllButton: {
+      width: "100%",
+      padding: "12px 0",
+    },
   },
 };
 
