@@ -16,11 +16,6 @@ const itemVariants = {
   show: { opacity: 1, y: 0 },
 };
 
-// Fungsi untuk mendapatkan avatar (menggunakan Alex dan Steve untuk semua)
-const getAvatarUrl = (user) => {
-  return user.skin === "Alex" ? alexAvatar : steveAvatar;
-};
-
 // Fungsi untuk memisahkan nama pengguna dan nama dalam tanda kurung
 const nickMC = (username) => {
   const regex = /\(([^)]+)\)/;
@@ -28,6 +23,21 @@ const nickMC = (username) => {
   const mainUsername = username.split("(")[0].trim();
   const nickname = match ? match[1] : null;
   return { mainUsername, nickname };
+};
+
+// Fungsi untuk mendapatkan avatar premium.
+// Jika properti isPremium bernilai true atau terdapat nickname (format main(nickname)),
+// maka URL akan menggunakan minepic.org. Jika terdapat nickname, maka digunakan nilai nickname,
+// jika tidak, digunakan mainUsername.
+const getAvatarUrl = (user) => {
+  const { mainUsername, nickname } = nickMC(user.username);
+  if (user.isPremium || nickname) {
+    // Gunakan nickname jika ada, jika tidak gunakan mainUsername
+    const avatarUsername = nickname ? nickname : mainUsername;
+    return `https://minepic.org/avatar/8/${avatarUsername}`;
+  }
+  // Jika akun tidak premium, gunakan avatar default berdasarkan skin
+  return user.skin === "Alex" ? alexAvatar : steveAvatar;
 };
 
 function Members() {
@@ -48,15 +58,15 @@ function Members() {
         // Tambahkan beberapa profil manual
         const manualProfiles = [
           {
-            username: "ZiwoxYT",
+            username: "ZiwoxYT", // tidak ada tanda kurung, dianggap non-premium jika isPremium false
             role: "Moderator",
-            isPremium: true, // Menggunakan skin premium
+            isPremium: true, // Karena isPremium true, maka avatar premium akan dipakai
             skin: "Alex",
           },
           {
             username: "nonPremiumUser",
             role: "Administrator",
-            isPremium: false, // Tidak premium, gunakan avatar default
+            IsPremium: true, // Tidak premium, gunakan avatar default
             skin: "Steve",
           },
         ];
@@ -65,203 +75,202 @@ function Members() {
         console.error("Error fetching members:", error);
         const manualProfiles = [
           {
-            username: "Alwisusilo(Alwisusilo)",
+            username: "Alwisusilo(Alwisusilo)", // premium: nickname sama dengan mainUsername
             role: "CEO",
             isPremium: true,
             skin: "Steve",
           },
           {
-            username: "Starfruit(Senn0_)",
+            username: "Starfruit(Senn0_)", // premium: terdapat nickname yang berbeda
             role: "Supervisor",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Graymontt(Graymontt)",
             role: "Supervisor",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Jukius(JukianaAzura)",
             role: "Supervisor",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
-          },
-          {
+          },          {
             username: "AmatsukaYuto(UtoYuto)",
             role: "Supervisor",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "AlanDinos(AlanDinos)",
             role: "Supervisor",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Mutti(shanskira)",
             role: "Supervisor",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Ray28s(Ray28s)",
             role: "Developer",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Sy4dd(Sy4dd)",
             role: "Developer",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "64sein(64sein)",
             role: "Developer",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Twelve(Twelve)",
             role: "Developer",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "AGoldMach(AGoldMach)",
             role: "Administrator",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Zero(ZeroTheBoys)",
             role: "Administrator",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Vinn(Vinncenz_)",
             role: "Administrator",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Itsumaqydesu(.Itsumaqydesu)",
             role: "Community Manager",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Polivin4875(.Polivin4875)",
             role: "Moderator",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
             username: "Rafli1123(Rafli1123)",
             role: "Moderator",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "Boenyy",
+            username: "Boenyy(Helper)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "Syawmoon",
+            username: "Syawmoon(Syawmoon)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: ".Novalgaming2512",
+            username: ".Novalgaming2512(.Novalgaming2512)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "PIXELS19",
+            username: "PIXELS19(PIXELS19)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: ".Dartnes9440",
+            username: ".Dartnes9440(.Dartnes9440)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "SyafrielAD",
+            username: "SyafrielAD(SyafrielAD)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: ".NandaPutra7",
+            username: ".NandaPutra7(.NandaPutra7)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "ArcadianFish",
+            username: "ArcadianFish(ArcadianFish)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "mervynn",
+            username: "mervynn(mervynn)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "Kirry",
+            username: "Kirry(Kirry)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: ".FesGamers",
+            username: ".FesGamers(.FesGamers)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "RanggaFauzi",
+            username: "RanggaFauzi(RanggaFauzi)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "ZFRAx",
+            username: "ZFRAx(ZFRAx)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: ".PIXXELXL",
+            username: ".PIXXELXL(.PIXXELXL)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "LangNaySKY",
+            username: "LangNaySKY(LangNaySKY)",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
           },
           {
-            username: "KITLY",
+            username: "KITLY(KITLY))",
             role: "Helper",
-            isPremium: false,
+            IsPremium: true,
             skin: "Steve",
-          },                                                                                                                                                                                                                                                                                                                                       
+          },
         ];
         setStaffMembers(manualProfiles);
       }
@@ -274,9 +283,10 @@ function Members() {
     staff.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredByRole = selectedGroup === "View All"
-    ? filteredStaff
-    : filteredStaff.filter((staff) => staff.role === selectedGroup);
+  const filteredByRole =
+    selectedGroup === "View All"
+      ? filteredStaff
+      : filteredStaff.filter((staff) => staff.role === selectedGroup);
 
   return (
     <div style={styles.container}>
@@ -393,23 +403,6 @@ const styles = {
     marginBottom: "15px",
     borderBottom: "1px solid #333",
     paddingBottom: "5px",
-  },
-  sidebarList: {
-    listStyle: "none",
-    padding: 0,
-    margin: "0 0 20px 0",
-  },
-  sidebarItem: {
-    marginBottom: "10px",
-  },
-  sidebarLink: {
-    color: "#aaa",
-    cursor: "pointer",
-  },
-  sidebarLinkActive: {
-    color: "#fff",
-    fontWeight: "bold",
-    cursor: "pointer",
   },
   groupSection: {
     marginBottom: "20px",
@@ -530,9 +523,6 @@ const styles = {
     },
     sidebarTitle: {
       fontSize: "16px",
-    },
-    sidebarList: {
-      padding: "10px 0",
     },
     searchBar: {
       padding: "8px",
