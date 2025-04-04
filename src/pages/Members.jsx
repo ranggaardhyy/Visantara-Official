@@ -34,7 +34,7 @@ const getAvatarUrl = (user) => {
   if (user.isPremium || nickname) {
     // Gunakan nickname jika ada, jika tidak gunakan mainUsername
     const avatarUsername = nickname ? nickname : mainUsername;
-    return `https://minepic.org/avatar/8/${avatarUsername}`;
+    return `https://minepic.org/avatar/128/${avatarUsername}`;
   }
   // Jika akun tidak premium, gunakan avatar default berdasarkan skin
   return user.skin === "Alex" ? alexAvatar : steveAvatar;
@@ -146,7 +146,7 @@ function Members() {
             skin: "Steve",
           },
           {
-            username: "Zero(ZeroTheBoys)",
+            username: "ZeroTheBoys(ZeroTheBoys)",
             role: "Administrator",
             IsPremium: true,
             skin: "Steve",
