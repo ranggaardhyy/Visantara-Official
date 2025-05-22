@@ -120,9 +120,10 @@ const Footer = () => {
           <motion.button
             style={styles.shopButton}
             whileHover={{ scale: 1.05 }}
-            onClick={() => window.open("https://store.alwination.id", "_blank")}
+            onClick={() => window.open("", "_blank")}
           >
-            Shop Now <FaShoppingCart style={{ marginLeft: "5px" }} />
+            <FaShoppingCart style={{ marginLeft: "5px" }}/>
+            <sup style={styles.comingSoon}>Coming Soon</sup>
           </motion.button>
         </div>
       </div>
