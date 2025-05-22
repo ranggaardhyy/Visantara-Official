@@ -23,14 +23,12 @@ function Navbar() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Animasi dasar untuk setiap nav item
   const navItemVariants = {
     hover: { scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" },
   };
 
   return (
     <nav style={styles.navbar}>
-      {/* Desktop Navigation */}
       {!isMobile && (
         <div style={styles.navCenter}>
           <motion.div variants={navItemVariants} whileHover="hover">
@@ -45,7 +43,7 @@ function Navbar() {
           </motion.div>
           <motion.div variants={navItemVariants} whileHover="hover">
             <a
-              href="https://discord.gg/alwination"
+              href="https://discord.visantara.com/"
               target="_blank"
               rel="noopener noreferrer"
               style={styles.discordButton}
@@ -54,14 +52,14 @@ function Navbar() {
             </a>
           </motion.div>
           <motion.div variants={navItemVariants} whileHover="hover">
-            {/* Store diarahkan ke webstore eksternal */}
             <a
-              href="https://store.alwination.id"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               style={styles.navLink}
             >
               <FaShoppingCart style={styles.icon} /> Store
+              <sup style={styles.comingSoon}>Coming Soon</sup>
             </a>
           </motion.div>
           <motion.div variants={navItemVariants} whileHover="hover">
@@ -72,7 +70,6 @@ function Navbar() {
         </div>
       )}
 
-      {/* Mobile Hamburger */}
       {isMobile && (
         <>
           <button style={styles.menuButton} onClick={toggleMenu}>
@@ -100,7 +97,7 @@ function Navbar() {
             </motion.div>
             <motion.div variants={navItemVariants} whileHover="hover">
               <a
-                href="https://discord.gg/alwination"
+                href="https://discord.visantara.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={styles.mobileDiscordButton}
@@ -111,13 +108,14 @@ function Navbar() {
             </motion.div>
             <motion.div variants={navItemVariants} whileHover="hover">
               <a
-                href="https://store.alwination.id"
+                href=""
                 target="_blank"
                 rel="noopener noreferrer"
                 style={styles.mobileNavLink}
                 onClick={toggleMenu}
               >
                 <FaShoppingCart style={styles.icon} /> Store
+                <sup style={styles.comingSoon}>Coming Soon</sup>
               </a>
             </motion.div>
             <motion.div variants={navItemVariants} whileHover="hover">
@@ -231,6 +229,11 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "8px",
+  },
+  comingSoon: {
+    fontSize: "10px",
+    color: "#ffcc00",
+    marginLeft: "4px",
   },
 };
 
