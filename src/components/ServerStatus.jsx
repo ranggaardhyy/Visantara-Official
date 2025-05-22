@@ -41,10 +41,10 @@ const ServerStatus = () => {
       alignItems: "center",
       justifyContent: "center",
       gap: "10px",
-      background: "rgba(255, 165, 0, 0.2)", // orange transparan
+      background: "rgba(4, 93, 105, 0.2)", 
       padding: "10px 16px",
       borderRadius: "8px",
-      color: "#FFA500", // teks orange
+      color: "#ADD8E6", // teks orange
       fontWeight: "bold",
       fontSize: "14px",
       textTransform: "uppercase",
@@ -59,7 +59,7 @@ const ServerStatus = () => {
     playButton: {
       width: "32px",
       height: "32px",
-      background: "#FFA500",
+      background: "#ADD8E6",
       borderRadius: "50%",
       display: "flex",
       alignItems: "center",
@@ -67,7 +67,7 @@ const ServerStatus = () => {
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
     },
     playIcon: {
-      color: "#ffffff",
+      color: "#000000",
       fontSize: "14px",
     },
   };

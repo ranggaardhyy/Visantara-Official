@@ -230,8 +230,8 @@ const styles = {
     marginBottom: "10px",
   },
   highlight: {
-    color: "#ffcc00",
-    textShadow: "0 0 8px rgba(255, 204, 0, 0.8)",
+    color: "#ADD8E6",
+    textShadow: "0 0 8px rgba(0, 152, 172, 0.8)",
   },
   text: {
     fontSize: "14px",
@@ -257,7 +257,7 @@ const styles = {
   shopButton: {
     marginTop: "15px",
     padding: "10px 20px",
-    backgroundColor: "#ffcc00",
+    backgroundColor: "#00FFFF",
     color: "#111",
     borderRadius: "5px",
     border: "none",
@@ -280,7 +280,7 @@ const styles = {
   },
   icon: {
     marginRight: "8px",
-    color: "#ffcc00",
+    color: "#00FFFF",
     fontSize: "18px",
   },
   link: {
@@ -291,7 +291,7 @@ const styles = {
   },
   adminIcon: {
     cursor: "pointer",
-    color: "#ffcc00",
+    color: "#00FFFF",
     fontSize: "26px",
   },
   iconContainer: {
