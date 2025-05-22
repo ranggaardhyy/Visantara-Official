@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaPlay } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SERVER_IP = "play.alwination.id";
+const SERVER_IP = "play.visantara.com";
 
 const ServerStatus = () => {
   const [players, setPlayers] = useState(null);

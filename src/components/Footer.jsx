@@ -72,7 +72,7 @@ const Footer = () => {
             Start your journey today! Join the server now to play the best bedwars, skywars, and more!
           </p>
           <motion.button style={styles.playButton} whileHover={{ scale: 1.05 }}>
-            play.alwination.id <span style={styles.arrow}>»</span>
+            play.visantara.com<span style={styles.arrow}>»</span>
           </motion.button>
         </div>
 
@@ -190,7 +190,7 @@ const Footer = () => {
       {/* Copyright */}
       <div style={styles.copyright}>
         <p>
-          <strong>AlwiNation © 2025. All rights reserved.</strong>
+          <strong>Visantara © 2025. All rights reserved.</strong>
         </p>
         <p style={styles.smallText}>Not affiliated with Mojang or Microsoft.</p>
       </div>
