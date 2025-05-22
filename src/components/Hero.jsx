@@ -2,23 +2,24 @@ import React from "react";
 import { motion } from "framer-motion";
 import Particles from "react-tsparticles";
 import ServerStatus from "./ServerStatus";
-import bgImage from "../assets/images/minecraft-bg.jpeg";
+import bgImage from "../assets/images/visantara-bg.jpg";
 import logo from "../assets/images/logo.png";
 
-const Hero = ({ children }) => {
+const Hero = ({ children, blur = 6, overlayOpacity = 0.6 }) => {
   const styles = {
     heroSection: {
       position: "relative",
       display: "flex",
-      flexDirection: "column", // gunakan kolom untuk urutan vertikal
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       height: "100vh",
       textAlign: "center",
+      backgroundImage: `url(${bgImage})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
-      backgroundImage: `url(${bgImage})`,
       overflow: "hidden",
+      filter: `blur(0px)`, // Jangan blur langsung section
     },
     heroOverlay: {
       position: "absolute",
@@ -26,7 +27,9 @@ const Hero = ({ children }) => {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.6)",
+      backgroundColor: `rgba(0, 0, 0, ${overlayOpacity})`,
+      backdropFilter: `blur(${blur}px)`,
+      WebkitBackdropFilter: `blur(${blur}px)`,
       zIndex: 1,
     },
     heroContent: {
@@ -42,7 +45,6 @@ const Hero = ({ children }) => {
     },
     heroLogo: {
       display: "block",
-      margin: "0 auto 20px auto",
       marginBottom: "20px",
       width: "230px",
     },
@@ -55,7 +57,7 @@ const Hero = ({ children }) => {
       zIndex: 0,
     },
     serverStatusWrapper: {
-      marginTop: "40px", // jarak antara logo dan server status
+      marginTop: "40px",
     },
   };
 
@@ -65,7 +67,45 @@ const Hero = ({ children }) => {
         value: "transparent",
       },
     },
-    fpsLimit: 60,
+    fpsLimit: 120,
+    particles: {
+      number: {
+        value: 0,
+        density: {
+          enable: false,
+          area: 800,
+        },
+      },
+      color: {
+        value: "#ffffff",
+      },
+      shape: {
+        type: "circle",
+        options: {
+          sides: 5,
+        },
+      },
+      opacity: {
+        value: 0.5,
+        random: false,
+        anim: {
+          enable: false,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false,
+        },
+      },
+      size: {
+        value: 3,
+        random: true,
+        anim: {
+          enable: false,
+          speed: 40,
+          size_min: 0.1,
+          sync: false,
+        },
+      },
+    },
     interactivity: {
       events: {
         onClick: { enable: true, mode: "push" },
@@ -77,23 +117,6 @@ const Hero = ({ children }) => {
         repulse: { distance: 100, duration: 0.4 },
       },
     },
-    particles: {
-      color: { value: "#ffffff" },
-      links: { enable: false },
-      move: {
-        direction: "bottom",
-        enable: true,
-        outMode: "out",
-        speed: 2,
-      },
-      number: {
-        density: { enable: true, area: 800 },
-        value: 50,
-      },
-      opacity: { value: 0.5 },
-      shape: { type: "circle" },
-      size: { random: true, value: 4 },
-    },
     detectRetina: true,
   };
 
@@ -104,21 +127,21 @@ const Hero = ({ children }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Efek Partikel */}
+      {/* Particles Background */}
       <div style={styles.particlesContainer}>
         <Particles options={particlesOptions} />
       </div>
 
-      {/* Overlay */}
+      {/* Overlay dengan blur dan opacity */}
       <div style={styles.heroOverlay}></div>
 
+      {/* Content */}
       <motion.div
         style={styles.heroContent}
         initial={{ y: -20 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        {/* Animasi heartbeat pada logo */}
         <motion.img
           src={logo}
           alt="Logo"
@@ -126,7 +149,6 @@ const Hero = ({ children }) => {
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         />
-        {/* ServerStatus diletakkan tepat di bawah logo */}
         <div style={styles.serverStatusWrapper}>
           <ServerStatus />
         </div>
