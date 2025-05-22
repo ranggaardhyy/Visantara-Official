@@ -5,7 +5,7 @@ import ServerStatus from "./ServerStatus";
 import bgImage from "../assets/images/visantara-bg.jpg";
 import logo from "../assets/images/logo.png";
 
-const Hero = ({ children, blur = 6, overlayOpacity = 0.6 }) => {
+const Hero = ({ children, blur = 6, overlayOpacity = 0.85 }) => {
   const styles = {
     heroSection: {
       position: "relative",
