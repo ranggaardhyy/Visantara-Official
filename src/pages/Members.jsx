@@ -61,13 +61,14 @@ export default function Members() {
     setStaffMembers(dummyData);
   }, []);
 
-  const filteredMembers = staffMembers.filter((member) =>
-    member.username.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedRole === "All" || member.role === selectedRole)
+  const filteredMembers = staffMembers.filter(
+    (member) =>
+      member.username.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (selectedRole === "All" || member.role === selectedRole)
   );
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#111", color: "#ccc" }}>
+    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#111", color: "#ccc", marginTop: "80px" }}>
       <div style={{ width: "250px", padding: "20px", backgroundColor: "#1a1a1a", borderRight: "1px solid #222" }}>
         <h2 style={{ color: "#fff" }}>Filter</h2>
         <input
@@ -80,7 +81,7 @@ export default function Members() {
         <select
           value={selectedRole}
           onChange={(e) => setSelectedRole(e.target.value)}
-          style={{ width: "100%", padding: "8px", backgroundColor: "#333", color: "#ccc", border: "1px solid #444" }}
+          style={{ width: "100%", padding: "8px", marginBottom: "15px", backgroundColor: "#333", color: "#ccc", border: "1px solid #444" }}
         >
           <option value="All">All Roles</option>
           {roles.map((role) => (
@@ -95,7 +96,7 @@ export default function Members() {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}
+          style={{ display: "flex", flexWrap: "wrap", gap: "15px", paddingTop: "20px" }} // ← padding top ditambahkan di sini
         >
           {filteredMembers.map((member) => {
             const { mainUsername, nickname } = nickMC(member.username);
