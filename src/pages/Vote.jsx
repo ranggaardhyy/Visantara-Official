@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 
 const Vote = () => {
-  const voteLink = "https://minecraft-mp.com/server/339723/vote/";
+  const voteLink = "https://minecraft-mp.com/server/336809/vote/";
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
