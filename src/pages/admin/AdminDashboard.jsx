@@ -1,11 +1,8 @@
 // src/pages/admin/AdminDashboard.jsx
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Hero from "../../components/Hero";
-import Footer from "../../components/Footer";
-import AddAnnouncement from "../../components/Api/AddAnnouncementForm"; // Untuk tambah pengumuman
-import EditAnnouncement from "../../components/Api/EditAnnouncement"; // Untuk edit pengumuman
-import DelAnnouncement from "../../components/Api/DelAnnouncement"; // Untuk hapus pengumuman
+import Hero from "../../components/layout/Hero";
+import Footer from "../../components/layout/Footer";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("announcement");

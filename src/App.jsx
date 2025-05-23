@@ -1,17 +1,17 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Store from "./pages/Store";
-import Vote from "./pages/Vote";
-import NotFound from "./pages/NotFound";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Home from "./pages/general/Home";
+import Store from "./pages/store/Store";
+import Vote from "./pages/community/Vote";
+import NotFound from "./pages/general/NotFound";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import Rules from "./pages/Rules";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import Members from "./pages/Members";
-import Cookies from "./pages/Cookies";
+import Rules from "./pages/general/Rules";
+import Terms from "./pages/legal/Terms";
+import Privacy from "./pages/legal/Privacy";
+import Members from "./pages/community/Members";
+import Cookies from "./pages/legal/Cookies";
+import Announcement from "./pages/community/Announcement";
 
 function App() {
     return (
@@ -19,6 +19,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/announcement" element={<Announcement />} />
                 <Route path="/store" element={<Store />} />
                 <Route path="/vote" element={<Vote />} />
                 <Route path="/admin" element={<AdminDashboard />} />

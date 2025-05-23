@@ -3,6 +3,8 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
+        "@tsparticles/engine": "^3.8.1",
+        "@tsparticles/slim": "^3.8.1",
         "axios": "^1.8.4",
         "cookie-parser": "^1.4.7",
         "dompurify": "^3.2.4",
@@ -12,8 +14,8 @@
         "react-helmet-async": "^2.0.5",
         "react-icons": "^5.5.0",
         "react-router-dom": "^6.30.0",
-        "react-tsparticles": "^1.40.2",
-        "tsparticles": "^1.40.2",
+        "react-tsparticles": "^1.18.11",
+        "tsparticles": "^1.4.3",
         "uid-safe": "^2.1.5"
     },
     "scripts": {
