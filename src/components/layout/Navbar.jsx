@@ -69,18 +69,20 @@ function Navbar() {
       )}
       
       {/* Tombol Discord */}
-      <div style={{ marginLeft: "auto" }}>
-        <motion.div variants={navItemVariants} whileHover="hover">
-          <a
-            href="https://discord.visantara.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={styles.discordButton}
-          >
-            <FaDiscord style={styles.icon} /> Discord
-          </a>
-        </motion.div>
-      </div>   
+      {!isMobile && (
+        <div style={{ marginLeft: "auto" }}>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <a
+              href="https://discord.visantara.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.discordButton}
+            >
+              <FaDiscord style={styles.icon} /> Discord
+            </a>
+          </motion.div>
+        </div>
+      )}
 
       {/* Tombol menu kanan */}
       {isMobile && (
