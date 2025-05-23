@@ -52,7 +52,7 @@ export default function Members() {
       { username: "HnaRay(HnaRay)", role: "Administrator", isPremium: true, skin: "Steve" },
       { username: "Boenyy(Boenyy)", role: "Administrator", isPremium: true, skin: "Steve" },
       { username: "Terbang(Terbang)", role: "Developer", isPremium: true, skin: "Steve" },
-      { username: "Shiroha(_Herzon)", role: "Developer", isPremium: true, skin: "Steve" },
+      { username: "Shiroha(_Herzon_)", role: "Developer", isPremium: true, skin: "Steve" },
       { username: "dawnbuild(dawnbuild)", role: "Developer", isPremium: true, skin: "Steve" },
       { username: "PVPSHINE(PVPSHINE)", role: "Moderator", isPremium: true, skin: "Steve" },
       { username: "Bocil_3l3k(Bocil_3l3k)", role: "Helper", isPremium: true, skin: "Steve" },
