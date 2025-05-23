@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import logo from "../assets/images/navbar-logo.png"; 
 import {
   FaHome,
   FaBook,
@@ -10,6 +11,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { BsPersonFillGear } from "react-icons/bs";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +31,12 @@ function Navbar() {
 
   return (
     <nav style={styles.navbar}>
+      {/* Logo kiri */}
+      <div style={styles.logo}>
+        <img src= {logo} alt="Logo" style={{ height: "120px" }} />
+      </div>
+
+      {/* Navigasi Tengah */}
       {!isMobile && (
         <div style={styles.navCenter}>
           <motion.div variants={navItemVariants} whileHover="hover">
@@ -42,22 +50,12 @@ function Navbar() {
             </Link>
           </motion.div>
           <motion.div variants={navItemVariants} whileHover="hover">
-            <a
-              href="https://discord.visantara.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.discordButton}
-            >
-              <FaDiscord style={styles.icon} /> Discord
-            </a>
+            <Link to="/members" style={styles.navLink}>
+              <BsPersonFillGear style={styles.icon} /> Staff
+            </Link>
           </motion.div>
           <motion.div variants={navItemVariants} whileHover="hover">
-            <a
-              href=""
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.navLink}
-            >
+            <a href="#" style={styles.navLink}>
               <FaShoppingCart style={styles.icon} /> Store
               <sup style={styles.comingSoon}>Coming Soon</sup>
             </a>
@@ -69,62 +67,77 @@ function Navbar() {
           </motion.div>
         </div>
       )}
-
-      {isMobile && (
-        <>
-          <button style={styles.menuButton} onClick={toggleMenu}>
-            <FaBars />
-          </button>
-
-          <div
-            style={{
-              ...styles.mobileMenu,
-              right: menuOpen ? "0" : "-70%",
-            }}
+      
+      {/* Tombol Discord */}
+      <div style={{ marginLeft: "auto" }}>
+        <motion.div variants={navItemVariants} whileHover="hover">
+          <a
+            href="https://discord.visantara.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.discordButton}
           >
-            <button style={styles.closeButton} onClick={toggleMenu}>
-              <FaTimes />
-            </button>
-            <motion.div variants={navItemVariants} whileHover="hover">
-              <Link to="/" style={styles.mobileNavLink} onClick={toggleMenu}>
-                <FaHome style={styles.icon} /> Home
-              </Link>
-            </motion.div>
-            <motion.div variants={navItemVariants} whileHover="hover">
-              <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
-                <FaBook style={styles.icon} /> Rules
-              </Link>
-            </motion.div>
-            <motion.div variants={navItemVariants} whileHover="hover">
-              <a
-                href="https://discord.visantara.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={styles.mobileDiscordButton}
-                onClick={toggleMenu}
-              >
-                <FaDiscord style={styles.icon} /> Discord
-              </a>
-            </motion.div>
-            <motion.div variants={navItemVariants} whileHover="hover">
-              <a
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
-                style={styles.mobileNavLink}
-                onClick={toggleMenu}
-              >
-                <FaShoppingCart style={styles.icon} /> Store
-                <sup style={styles.comingSoon}>Coming Soon</sup>
-              </a>
-            </motion.div>
-            <motion.div variants={navItemVariants} whileHover="hover">
-              <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
-                <FaPoll style={styles.icon} /> Vote
-              </Link>
-            </motion.div>
-          </div>
-        </>
+            <FaDiscord style={styles.icon} /> Discord
+          </a>
+        </motion.div>
+      </div>   
+
+      {/* Tombol menu kanan */}
+      {isMobile && (
+        <button style={styles.menuButton} onClick={toggleMenu}>
+          <FaBars />
+        </button>
+      )}
+
+      {/* Mobile Menu */}
+      {isMobile && (
+        <div
+          style={{
+            ...styles.mobileMenu,
+            left: menuOpen ? "0" : "-70%",
+          }}
+        >
+          <button style={styles.closeButton} onClick={toggleMenu}>
+            <FaTimes />
+          </button>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <FaHome style={styles.icon} /> Home
+            </Link>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <FaBook style={styles.icon} /> Rules
+            </Link>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <a
+              href="https://discord.visantara.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.mobileDiscordButton}
+              onClick={toggleMenu}
+            >
+              <FaDiscord style={styles.icon} /> Discord
+            </a>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/members" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <BsPersonFillGear style={styles.icon} /> Staff
+            </Link>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <a href="#" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <FaShoppingCart style={styles.icon} /> Store
+              <sup style={styles.comingSoon}>Coming Soon</sup>
+            </a>
+          </motion.div>
+          <motion.div variants={navItemVariants} whileHover="hover">
+            <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
+              <FaPoll style={styles.icon} /> Vote
+            </Link>
+          </motion.div>
+        </div>
       )}
     </nav>
   );
@@ -132,21 +145,29 @@ function Navbar() {
 
 const styles = {
   navbar: {
-    position: "absolute",
+    position: "fixed",
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 10,
+    background: "transparent",
+    zIndex: 1000,
+    padding: "10px 20px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    padding: "10px 20px",
-    background: "transparent",
+    height: "60px",
+  },
+  logo: {
+    display: "flex",
+    alignItems: "center",
+    zIndex: 1001,
   },
   navCenter: {
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
     display: "flex",
-    gap: "20px",
     alignItems: "center",
+    gap: "20px",
   },
   navLink: {
     color: "#ffffff",
@@ -160,11 +181,9 @@ const styles = {
     borderRadius: "4px",
     transition: "background 0.3s ease",
   },
-  icon: {
-    fontSize: "18px",
-  },
   discordButton: {
     backgroundColor: "#5865F2",
+    marginLeft: "auto",
     padding: "8px 12px",
     color: "#ffffff",
     textDecoration: "none",
@@ -173,28 +192,29 @@ const styles = {
     alignItems: "center",
     gap: "6px",
     fontWeight: "bold",
-    transition: "background 0.3s ease",
+    cursor: "pointer",
   },
+
   menuButton: {
+    marginLeft: "auto",
     fontSize: "24px",
     color: "#ffffff",
     background: "none",
     border: "none",
     cursor: "pointer",
-    zIndex: 11,
-    marginLeft: "auto",
+    zIndex: 1001,
   },
   mobileMenu: {
     position: "fixed",
     top: 0,
-    right: "-70%",
+    left: "-70%",
     width: "70%",
     height: "100vh",
-    backgroundColor: "rgba(0,0,0,0.95)",
+    backgroundColor: "#001f3f", // Navy
     display: "flex",
     flexDirection: "column",
     paddingTop: "60px",
-    transition: "right 0.3s ease-in-out",
+    transition: "left 0.3s ease-in-out",
     zIndex: 9999,
   },
   closeButton: {
@@ -229,6 +249,9 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "8px",
+  },
+  icon: {
+    fontSize: "18px",
   },
   comingSoon: {
     fontSize: "10px",
