@@ -15,11 +15,18 @@ const Hero = ({ children, blur = 6, overlayOpacity = 0.85 }) => {
       justifyContent: "center",
       height: "100vh",
       textAlign: "center",
+      overflow: "hidden",
+    },
+    backgroundImage: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
       backgroundImage: `url(${bgImage})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
-      overflow: "hidden",
-      filter: `blur(0px)`, // Jangan blur langsung section
+      zIndex: 0, // paling bawah
     },
     heroOverlay: {
       position: "absolute",
@@ -48,76 +55,54 @@ const Hero = ({ children, blur = 6, overlayOpacity = 0.85 }) => {
       marginBottom: "20px",
       width: "230px",
     },
+    serverStatusWrapper: {
+      marginTop: "40px",
+    },
     particlesContainer: {
       position: "absolute",
       top: 0,
       left: 0,
       width: "100%",
       height: "100%",
-      zIndex: 0,
-    },
-    serverStatusWrapper: {
-      marginTop: "40px",
+      zIndex: 3, // Paling atas
+      pointerEvents: "none", // supaya klik tetap ke konten bawah
     },
   };
 
   const particlesOptions = {
-    background: {
-      color: {
-        value: "transparent",
-      },
-    },
-    fpsLimit: 120,
     particles: {
       number: {
-        value: 0,
-        density: {
-          enable: false,
-          area: 800,
-        },
+        value: 60,
+        density: { enable: true, value_area: 800 },
       },
-      color: {
-        value: "#ffffff",
-      },
-      shape: {
-        type: "circle",
-        options: {
-          sides: 5,
-        },
-      },
-      opacity: {
-        value: 0.5,
+      color: { value: "#ffffff" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 3, random: true },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "none",
         random: false,
-        anim: {
-          enable: false,
-          speed: 1,
-          opacity_min: 0.1,
-          sync: false,
-        },
-      },
-      size: {
-        value: 3,
-        random: true,
-        anim: {
-          enable: false,
-          speed: 40,
-          size_min: 0.1,
-          sync: false,
-        },
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: { enable: true, rotateX: 600, rotateY: 1200 },
       },
     },
     interactivity: {
+      detect_on: "canvas",
       events: {
-        onClick: { enable: true, mode: "push" },
         onHover: { enable: true, mode: "repulse" },
+        onClick: { enable: true, mode: "push" },
         resize: true,
       },
       modes: {
-        push: { quantity: 4 },
         repulse: { distance: 100, duration: 0.4 },
+        push: { quantity: 4 },
       },
     },
-    detectRetina: true,
+    retina_detect: true,
   };
 
   return (
@@ -127,15 +112,13 @@ const Hero = ({ children, blur = 6, overlayOpacity = 0.85 }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Particles Background */}
-      <div style={styles.particlesContainer}>
-        <Particles options={particlesOptions} />
-      </div>
+      {/* Background image - paling bawah */}
+      <div style={styles.backgroundImage}></div>
 
-      {/* Overlay dengan blur dan opacity */}
+      {/* Overlay - di atas background */}
       <div style={styles.heroOverlay}></div>
 
-      {/* Content */}
+      {/* Content - di atas overlay */}
       <motion.div
         style={styles.heroContent}
         initial={{ y: -20 }}
@@ -154,6 +137,11 @@ const Hero = ({ children, blur = 6, overlayOpacity = 0.85 }) => {
         </div>
         {children}
       </motion.div>
+
+      {/* Particles - paling depan */}
+      <div style={styles.particlesContainer}>
+        <Particles params={particlesOptions} />
+      </div>
     </motion.section>
   );
 };
