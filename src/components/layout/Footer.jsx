@@ -69,7 +69,7 @@ const Footer = () => {
             Play Now <span style={styles.highlight}>-</span>
           </h3>
           <p style={styles.text}>
-            Start your journey today! Join the server now to play the best bedwars, skywars, and more!
+            Start your journey today! Join the server now to play the best Survival, Roleplay, Event and more!
           </p>
           <motion.button style={styles.playButton} whileHover={{ scale: 1.05 }}>
             play.visantara.com<span style={styles.arrow}>»</span>
