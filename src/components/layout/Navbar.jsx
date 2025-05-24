@@ -93,12 +93,12 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isMobile && (
-        <div
-          style={{
-            ...styles.mobileMenu,
-            left: menuOpen ? "0" : "-70%",
-          }}
-        >
+          <div
+            style={{
+              ...styles.mobileMenu,
+              right: menuOpen ? "0" : "-70%",
+            }}
+          >
           <button style={styles.closeButton} onClick={toggleMenu}>
             <FaTimes />
           </button>
@@ -111,17 +111,6 @@ function Navbar() {
             <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
               <FaBook style={styles.icon} /> Rules
             </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <a
-              href="https://discord.visantara.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.mobileDiscordButton}
-              onClick={toggleMenu}
-            >
-              <FaDiscord style={styles.icon} /> Discord
-            </a>
           </motion.div>
           <motion.div variants={navItemVariants} whileHover="hover">
             <Link to="/members" style={styles.mobileNavLink} onClick={toggleMenu}>
@@ -138,6 +127,17 @@ function Navbar() {
             <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
               <FaPoll style={styles.icon} /> Vote
             </Link>
+          </motion.div>
+            <motion.div variants={navItemVariants} whileHover="hover">
+            <a
+              href="https://discord.visantara.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.mobileDiscordButton}
+              onClick={toggleMenu}
+            >
+              <FaDiscord style={styles.icon} /> Discord
+            </a>
           </motion.div>
         </div>
       )}
@@ -209,19 +209,20 @@ const styles = {
   mobileMenu: {
     position: "fixed",
     top: 0,
-    left: "-70%",
+    right: "-70%", 
     width: "70%",
     height: "100vh",
-    backgroundColor: "#001f3f", // Navy
+    backgroundColor: "rgba(0, 0, 0, 0.85)",
     display: "flex",
     flexDirection: "column",
     paddingTop: "60px",
-    transition: "left 0.3s ease-in-out",
+    transition: "right 0.3s ease-in-out",
     zIndex: 9999,
   },
   closeButton: {
-    alignSelf: "flex-end",
-    marginRight: "20px",
+    position: "absolute",
+    top: "15px",
+    right: "20px",
     fontSize: "30px",
     color: "#ffffff",
     background: "none",
