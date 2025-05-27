@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import logo from "../../assets/images/navbar-logo.png"; 
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "../../assets/images/navbar-logo.png";
 import {
   FaHome,
   FaBook,
@@ -15,10 +15,17 @@ import { BsPersonFillGear } from "react-icons/bs";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth < 768);
+      }
+    };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -29,46 +36,47 @@ function Navbar() {
     hover: { scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" },
   };
 
+  const menuVariants = {
+    hidden: { right: "-70%" },
+    visible: { right: "0%" },
+    exit: { right: "-70%" },
+  };
+
   return (
     <nav style={styles.navbar}>
-      {/* Logo kiri */}
       <div style={styles.logo}>
-        <img src= {logo} alt="Logo" style={{ height: "120px" }} />
+        <img src={logo} alt="Logo" style={{ height: "120px" }} />
       </div>
 
-      {/* Navigasi Tengah */}
       {!isMobile && (
         <div style={styles.navCenter}>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/" style={styles.navLink}>
-              <FaHome style={styles.icon} /> Home
-            </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/rules" style={styles.navLink}>
-              <FaBook style={styles.icon} /> Rules
-            </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/members" style={styles.navLink}>
-              <BsPersonFillGear style={styles.icon} /> Staff
-            </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <a href="#" style={styles.navLink}>
-              <FaShoppingCart style={styles.icon} /> Store
-              <sup style={styles.comingSoon}>Coming Soon</sup>
-            </a>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/vote" style={styles.navLink}>
-              <FaPoll style={styles.icon} /> Vote
-            </Link>
-          </motion.div>
+          {[
+            { to: "/", icon: <FaHome />, label: "Home" },
+            { to: "/rules", icon: <FaBook />, label: "Rules" },
+            { to: "/staff", icon: <BsPersonFillGear />, label: "Staff" },
+            {
+              to: "#",
+              icon: <FaShoppingCart />,
+              label: "Store",
+              extra: <sup style={styles.comingSoon}>Coming Soon</sup>,
+            },
+            { to: "/vote", icon: <FaPoll />, label: "Vote" },
+          ].map(({ to, icon, label, extra }, index) => (
+            <motion.div key={index} variants={navItemVariants} whileHover="hover">
+              {to === "#" ? (
+                <a href="#" style={styles.navLink}>
+                  {icon} {label} {extra}
+                </a>
+              ) : (
+                <Link to={to} style={styles.navLink}>
+                  {icon} {label}
+                </Link>
+              )}
+            </motion.div>
+          ))}
         </div>
       )}
-      
-      {/* Tombol Discord */}
+
       {!isMobile && (
         <div style={{ marginLeft: "auto" }}>
           <motion.div variants={navItemVariants} whileHover="hover">
@@ -84,63 +92,72 @@ function Navbar() {
         </div>
       )}
 
-      {/* Tombol menu kanan */}
       {isMobile && (
         <button style={styles.menuButton} onClick={toggleMenu}>
           <FaBars />
         </button>
       )}
 
-      {/* Mobile Menu */}
-      {isMobile && (
-          <div
-            style={{
-              ...styles.mobileMenu,
-              right: menuOpen ? "0" : "-70%",
-            }}
+      <AnimatePresence>
+        {isMobile && menuOpen && (
+          <motion.div
+            key="mobileMenu"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={menuVariants}
+            transition={{ duration: 0.3 }}
+            style={styles.mobileMenu}
           >
-          <button style={styles.closeButton} onClick={toggleMenu}>
-            <FaTimes />
-          </button>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaHome style={styles.icon} /> Home
-            </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/rules" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaBook style={styles.icon} /> Rules
-            </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/members" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <BsPersonFillGear style={styles.icon} /> Staff
-            </Link>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <a href="#" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaShoppingCart style={styles.icon} /> Store
-              <sup style={styles.comingSoon}>Coming Soon</sup>
-            </a>
-          </motion.div>
-          <motion.div variants={navItemVariants} whileHover="hover">
-            <Link to="/vote" style={styles.mobileNavLink} onClick={toggleMenu}>
-              <FaPoll style={styles.icon} /> Vote
-            </Link>
-          </motion.div>
+            <button style={styles.closeButton} onClick={toggleMenu}>
+              <FaTimes />
+            </button>
+            {[
+              { to: "/", icon: <FaHome />, label: "Home" },
+              { to: "/rules", icon: <FaBook />, label: "Rules" },
+              { to: "/staff", icon: <BsPersonFillGear />, label: "Staff" },
+              {
+                to: "#",
+                icon: <FaShoppingCart />,
+                label: "Store",
+                extra: <sup style={styles.comingSoon}>Coming Soon</sup>,
+              },
+              { to: "/vote", icon: <FaPoll />, label: "Vote" },
+            ].map(({ to, icon, label, extra }, index) => (
+              <motion.div key={index} variants={navItemVariants} whileHover="hover">
+                {to === "#" ? (
+                  <a
+                    href="#"
+                    style={styles.mobileNavLink}
+                    onClick={toggleMenu}
+                  >
+                    {icon} {label} {extra}
+                  </a>
+                ) : (
+                  <Link
+                    to={to}
+                    style={styles.mobileNavLink}
+                    onClick={toggleMenu}
+                  >
+                    {icon} {label}
+                  </Link>
+                )}
+              </motion.div>
+            ))}
             <motion.div variants={navItemVariants} whileHover="hover">
-            <a
-              href="https://discord.visantara.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={styles.mobileDiscordButton}
-              onClick={toggleMenu}
-            >
-              <FaDiscord style={styles.icon} /> Discord
-            </a>
+              <a
+                href="https://discord.visantara.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={styles.mobileDiscordButton}
+                onClick={toggleMenu}
+              >
+                <FaDiscord style={styles.icon} /> Discord
+              </a>
+            </motion.div>
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
@@ -196,7 +213,6 @@ const styles = {
     fontWeight: "bold",
     cursor: "pointer",
   },
-
   menuButton: {
     marginLeft: "auto",
     fontSize: "24px",
@@ -209,7 +225,6 @@ const styles = {
   mobileMenu: {
     position: "fixed",
     top: 0,
-    right: "-70%", 
     width: "70%",
     height: "100vh",
     backgroundColor: "rgba(0, 0, 0, 0.85)",

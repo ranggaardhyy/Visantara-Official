@@ -96,8 +96,8 @@ const Footer = () => {
             </motion.li>
             <motion.li style={styles.listItem} whileHover={{ scale: 1.05 }}>
               <FaUsers style={styles.icon} />
-              <Link to="/members" style={styles.link}>
-                Members
+              <Link to="/staff" style={styles.link}>
+                Stafflist
               </Link>
             </motion.li>
             <motion.li style={styles.listItem} whileHover={{ scale: 1.05 }}>

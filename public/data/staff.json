@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Clementdav",
+    "role": "Owner",
+    "username": "Clementdav",
+    "premium": true
+  },
+  {
+    "id": 2,
+    "name": "Theo",
+    "role": "Owner",
+    "username": "7heo_",
+    "premium": true
+  },
+  {
+    "id": 3,
+    "name": "HanaRay",
+    "role": "Admin",
+    "username": "HnaRay",
+    "premium": true
+  },
+  {
+    "id": 4,
+    "name": "Boenyy",
+    "role": "Admin",
+    "username": "Boenyy",
+    "premium": true
+  },
+  {
+    "id": 5,
+    "name": "dawnbuild",
+    "role": "Developer",
+    "username": "dawnbuild",
+    "premium": true
+  },
+  {
+    "id": 6,
+    "name": "Terbang",
+    "role": "Developer",
+    "username": "Terbang",
+    "premium": true
+  },
+  {
+    "id": 7,
+    "name": "Shiroha",
+    "role": "Developer",
+    "username": "_Herzon_",
+    "premium": true
+  },
+  {
+    "id": 8,
+    "name": "PVPSHINE",
+    "role": "Moderator",
+    "username": "PVPSHINE",
+    "premium": true
+  },
+  {
+    "id": 9,
+    "name": "Bocil_3l3k",
+    "role": "Helper",
+    "username": "Bocil_3l3k",
+    "premium": true
+  },
+  {
+    "id": 10,
+    "name": "Syyanother",
+    "role": "Helper",
+    "username": "Syyanother",
+    "premium": true
+  }
+]

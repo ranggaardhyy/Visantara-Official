@@ -9,7 +9,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import Rules from "./pages/general/Rules";
 import Terms from "./pages/legal/Terms";
 import Privacy from "./pages/legal/Privacy";
-import Members from "./pages/community/Members";
+import Stafflist from "./pages/community/Stafflist";
 import Cookies from "./pages/legal/Cookies";
 import Announcement from "./pages/community/Announcement";
 
@@ -25,7 +25,7 @@ function App() {
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/privacy" element={<Privacy />} />
-                <Route path="/members" element={<Members />} />
+                <Route path="/staff" element={<Stafflist />} />
                 <Route path="/cookies" element={<Cookies />} />
                 <Route path="/rules" element={<Rules />} />
 

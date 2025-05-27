@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCopy } from "react-icons/fa";
-import Navbar from "../../components/layout/Navbar";
 import Hero from "../../components/layout/Hero";
 
 const Vote = () => {
@@ -71,7 +70,6 @@ const Vote = () => {
 
   return (
     <div style={styles.pageContainer}>
-      <Navbar />
       <Hero />
       <motion.div
         style={styles.voteContainerWrapper}

@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaListOl } from "react-icons/fa";
-import Navbar from "../../components/layout/Navbar";
 import Hero from "../../components/layout/Hero";
 
 const Rules = () => {
@@ -61,7 +60,6 @@ const Rules = () => {
 
   return (
     <div style={styles.container}>
-      <Navbar />
       <Hero />
       <motion.div
   style={styles.content}
@@ -100,7 +98,7 @@ const Rules = () => {
             transition={{ duration: 0.5 }}
             >
             <li style={styles.listItem}>
-                <strong>1. Respect Others</strong>
+                <strong>Respect Others</strong>
                 <ul style={styles.list}>
                 <li>Selalu hormati sesama pemain dan staff.</li>
                 <li>Dilarang melakukan pelecehan verbal ataupun non-verbal.</li>
@@ -109,7 +107,7 @@ const Rules = () => {
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>2. Advertising</strong>
+                <strong>Advertising</strong>
                 <ul style={styles.list}>
                 <li>Dilarang mempromosikan situs Web, Discord, Channel Youtube atau media sosial
                   lainnya yang tidak berhubungan dengan server ini.</li>
@@ -118,32 +116,32 @@ const Rules = () => {
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>3. Maintain Politeness</strong>
+                <strong>Maintain Politeness</strong>
                 <ul style={styles.list}>
                 <li>Dilarang menggunakan kata kata kasar, ofensif atau tidak pantas, baik di Chat maupun
                   di Voice Channel.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>4. No Real Money Trading (RMT)</strong>
+                <strong>No Real Money Trading (RMT)</strong>
                 <ul style={styles.list}>
                 <li>Dilarang keras memperjualbelikan item atau layanan game dengan uang asli.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>5. Zero Tolerance for Discrimination</strong>
+                <strong>Zero Tolerance for Discrimination</strong>
                 <ul style={styles.list}>
                 <li>Perlakukan semua orang dengan adil tanpa memandang usia, ras, gender, agama atau latar belakang lainnya</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>6. No Cheating or Exploiting</strong>
+                <strong>No Cheating or Exploiting</strong>
                 <ul style={styles.list}>
                 <li>Dilarang menggunakan cheat, bug, atau eksploitasi untuk keuntungan pribadi.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>7. Avoid Drama</strong>
+                <strong>Avoid Drama</strong>
                 <ul style={styles.list}>
                 <li>Jaga suasana tetap positif dan santai.</li>
                 <li>Hindari konflik, debat panas dan perilaku pasif agresif</li>
@@ -151,33 +149,33 @@ const Rules = () => {
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>8. No Spamming or Flooding</strong>
+                <strong>No Spamming or Flooding</strong>
                 <ul style={styles.list}>
                 <li>Jangan mengirim pesan, huruf, simbol atau emoji secara berlebihan.</li>
                 <li>Jangan membuat nama item yang berlebihan.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>9. No Scamming</strong>
+                <strong>No Scamming</strong>
                 <ul style={styles.list}>
                 <li>Segala bentuk penipuan atau pencurian akan di hukum dengan tegas.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>10. No Griefing</strong>
+                <strong>No Griefing</strong>
                 <ul style={styles.list}>
                 <li>Jangan merusak atau mengganggu bangunan pemain lain tanpa izin.</li>
                 <li>Jangan mengganggu aktivitas pemain lain.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>11. Keep It Clean</strong>
+                <strong>Keep It Clean</strong>
                 <ul style={styles.list}>
                 <li>Dilarang menggunakan konten NSFW pada username, avatar, nama item dan lainnya.</li>
                 </ul>
             </li>
             <li style={styles.listItem}>
-                <strong>12. Use Common Sense</strong>
+                <strong>Use Common Sense</strong>
                 <ul style={styles.list}>
                 <li>Jika sesuatu terasa salah, kemungkinan besar memang tidak diperbolehkan.</li>
                 <li>Bermainlah dengan jujur dan hormat</li>
