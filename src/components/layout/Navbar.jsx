@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/images/navbar-logo.png";
 import {
@@ -18,6 +18,9 @@ function Navbar() {
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < 768 : false
   );
+
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,6 +45,31 @@ function Navbar() {
     exit: { right: "-70%" },
   };
 
+  const getLinkStyle = (to) => ({
+    ...styles.navLink,
+    textDecoration: to === currentPath ? "line-through" : "none",
+    color: to === currentPath ? "lightblue" : "#ffffff",
+  });
+
+  const getMobileLinkStyle = (to) => ({
+    ...styles.mobileNavLink,
+    textDecoration: to === currentPath ? "line-through" : "none",
+    color: to === currentPath ? "lightblue" : "#ffffff",    
+  });
+
+  const navItems = [
+    { to: "/", icon: <FaHome />, label: "Home" },
+    { to: "/rules", icon: <FaBook />, label: "Rules" },
+    { to: "/staff", icon: <BsPersonFillGear />, label: "Staff" },
+    {
+      to: "/notfound",
+      icon: <FaShoppingCart />,
+      label: "Store",
+      extra: <sup style={styles.comingSoon}>Coming Soon</sup>,
+    },
+    { to: "/vote", icon: <FaPoll />, label: "Vote" },
+  ];
+
   return (
     <nav style={styles.navbar}>
       <div style={styles.logo}>
@@ -50,25 +78,14 @@ function Navbar() {
 
       {!isMobile && (
         <div style={styles.navCenter}>
-          {[
-            { to: "/", icon: <FaHome />, label: "Home" },
-            { to: "/rules", icon: <FaBook />, label: "Rules" },
-            { to: "/staff", icon: <BsPersonFillGear />, label: "Staff" },
-            {
-              to: "#",
-              icon: <FaShoppingCart />,
-              label: "Store",
-              extra: <sup style={styles.comingSoon}>Coming Soon</sup>,
-            },
-            { to: "/vote", icon: <FaPoll />, label: "Vote" },
-          ].map(({ to, icon, label, extra }, index) => (
+          {navItems.map(({ to, icon, label, extra }, index) => (
             <motion.div key={index} variants={navItemVariants} whileHover="hover">
               {to === "#" ? (
                 <a href="#" style={styles.navLink}>
                   {icon} {label} {extra}
                 </a>
               ) : (
-                <Link to={to} style={styles.navLink}>
+                <Link to={to} style={getLinkStyle(to)}>
                   {icon} {label}
                 </Link>
               )}
@@ -112,31 +129,16 @@ function Navbar() {
             <button style={styles.closeButton} onClick={toggleMenu}>
               <FaTimes />
             </button>
-            {[
-              { to: "/", icon: <FaHome />, label: "Home" },
-              { to: "/rules", icon: <FaBook />, label: "Rules" },
-              { to: "/staff", icon: <BsPersonFillGear />, label: "Staff" },
-              {
-                to: "#",
-                icon: <FaShoppingCart />,
-                label: "Store",
-                extra: <sup style={styles.comingSoon}>Coming Soon</sup>,
-              },
-              { to: "/vote", icon: <FaPoll />, label: "Vote" },
-            ].map(({ to, icon, label, extra }, index) => (
+            {navItems.map(({ to, icon, label, extra }, index) => (
               <motion.div key={index} variants={navItemVariants} whileHover="hover">
                 {to === "#" ? (
-                  <a
-                    href="#"
-                    style={styles.mobileNavLink}
-                    onClick={toggleMenu}
-                  >
+                  <a href="#" style={styles.mobileNavLink} onClick={toggleMenu}>
                     {icon} {label} {extra}
                   </a>
                 ) : (
                   <Link
                     to={to}
-                    style={styles.mobileNavLink}
+                    style={getMobileLinkStyle(to)}
                     onClick={toggleMenu}
                   >
                     {icon} {label}

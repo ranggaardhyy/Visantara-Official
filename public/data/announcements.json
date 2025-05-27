@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Server Maintenance",
+    "message": "Server akan offline untuk maintenance pada 30 Mei 2025 pukul 22:00 WIB.",
+    "type": "warning"
+  },
+  {
+    "id": 2,
+    "title": "Event Baru!",
+    "message": "Ikuti event Parkour Challenge dan menangkan hadiah menarik!",
+    "type": "info"
+  }
+]

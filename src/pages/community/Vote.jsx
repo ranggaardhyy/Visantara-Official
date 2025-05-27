@@ -113,11 +113,12 @@ const Vote = () => {
       color: "#eee",
       padding: "2rem",
       maxWidth: "600px",
-      margin: "2rem auto",
-      marginBottom: "8px",
+      margin: "2rem auto 8px",
       borderRadius: "8px",
-      lineHeight: "2.0",
-      whiteSpace: "pre-line",
+      lineHeight: "1.8",
+      whiteSpace: "normal",
+      textAlign: "left",
+      fontSize: "1rem",
     },
   };
 
@@ -169,31 +170,31 @@ const Vote = () => {
               </motion.div>
             )}
           </AnimatePresence>
+        <div ref={contentRef} style={styles.tutorialContainer}>
+          <h3 style={{ marginBottom: "1rem", fontWeight: "bold" }}>
+            IKUTI PANDUAN VOTE INI UNTUK VOTE SERVER VISANTARA!
+          </h3>
+          <ul style={{ paddingLeft: "1.2rem", marginBottom: "1rem" }}>
+            <li>Buka Minecraft, lalu masuk ke server Visantara</li>
+            <li>Ketik perintah <strong>/vote</strong> di chat</li>
+            <li>Klik link yang muncul di chat/gui</li>
+            <li>Masukkan username Minecraft Anda di kolom yang tersedia</li>
+            <li>Klik tombol "Vote" untuk mengirimkan vote Anda</li>
+            <li>Setelah vote berhasil, Anda akan menerima reward di dalam game</li>
+          </ul>
+
+          <p>
+            <strong>Contoh Cara Vote:</strong><br />
+            <code>Boenyy</code> &mdash; untuk Java<br />
+            <code>.Boenyy</code> &mdash; untuk Bedrock
+          </p>
+
+          <p style={{ fontStyle: "italic", marginTop: "1rem" }}>
+            Note: Jika Anda sudah mengikuti panduan di atas namun tidak mendapatkan reward vote, silakan hubungi admin di server/Discord!
+          </p>
+        </div>
         </motion.div>
       </motion.div>
-
-      <div ref={contentRef} style={styles.tutorialContainer}>
-        <strong>IKUTI PANDUAN VOTE INI UNTUK VOTE SERVER VISANTARA!</strong>
-        <li>Buka Minecraft, lalu masuk ke server Visantara</li>
-        <li>Ketik perintah <strong>/vote</strong> di chat</li>
-        <li>Klik link yang muncul di chat/gui</li>
-        <li>Pilih server Visantara dari daftar server yang ada</li>
-        <li>Klik tombol "Vote" di halaman server Visantara</li>
-        <li>Masukkan username Minecraft Anda di kolom yang tersedia</li>
-        <li>Klik tombol "Vote" untuk mengirimkan vote Anda</li>
-        <li>Setelah vote berhasil, Anda akan menerima reward di dalam game</li>
-        <br />
-        Contoh Cara Vote : 
-        <br />
-        Boenyy &lt;-- untuk java 
-        <br />
-        .Boenyy &lt;-- untuk bedrock
-        <br />
-        <br />
-        <em>
-          Note : Jika anda sudah mengikuti panduan di atas, namun anda tidak mendapatkan reward vote Silahkan hubungi admin di server/discord!
-        </em>
-      </div>
 
       <style>{`
         @keyframes bounce {

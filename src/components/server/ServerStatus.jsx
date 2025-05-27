@@ -100,16 +100,16 @@ const ServerStatus = () => {
             transition={{ duration: 0.3 }}
             style={{
               marginTop: "10px",
-              background: "#000",
-              color: "#FFA500",
+              background: "rgba(108, 189, 255, 0.53)",              
+              color: "#ffffff",
               padding: "8px 16px",
               borderRadius: "8px",
               fontSize: "14px",
               fontWeight: "bold",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+              boxShadow: "0 4px 10px rgba(60, 122, 255, 0.3)",
             }}
           >
-            ✅ IP Copied!
+            ✅IP COPIED!
           </motion.div>
         )}
       </AnimatePresence>
