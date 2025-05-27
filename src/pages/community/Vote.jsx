@@ -1,18 +1,42 @@
-// src/pages/Vote.jsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCopy } from "react-icons/fa";
+import { FaCopy, FaChevronDown } from "react-icons/fa";
 import Hero from "../../components/layout/Hero";
 
 const Vote = () => {
   const voteLink = "https://minecraft-mp.com/server/336809/vote/";
   const [copied, setCopied] = useState(false);
+  const [showArrow, setShowArrow] = useState(true);
+  const contentRef = useRef(null);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(voteLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const scrollToContent = () => {
+    contentRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowArrow(!entry.isIntersecting);
+      },
+      { threshold: 0.4 }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => {
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
+      }
+    };
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -66,11 +90,54 @@ const Vote = () => {
       fontSize: "0.9rem",
       color: "#FFA500",
     },
+    arrowContainer: {
+      textAlign: "center",
+      marginTop: "-40px",
+      position: "relative",
+      zIndex: 9999,
+    },
+    arrowButton: {
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      color: "#3498db",
+      fontSize: "2.5rem",
+      animation: "bounce 2s infinite",
+      padding: "0.5rem",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    tutorialContainer: {
+      backgroundColor: "#222",
+      color: "#eee",
+      padding: "2rem",
+      maxWidth: "600px",
+      margin: "2rem auto",
+      marginBottom: "8px",
+      borderRadius: "8px",
+      lineHeight: "2.0",
+      whiteSpace: "pre-line",
+    },
   };
 
   return (
     <div style={styles.pageContainer}>
       <Hero />
+
+      {showArrow && (
+        <div style={styles.arrowContainer}>
+          <button
+            style={styles.arrowButton}
+            onClick={scrollToContent}
+            aria-label="Scroll to tutorial"
+            title="Scroll ke tutorial"
+          >
+            <FaChevronDown />
+          </button>
+        </div>
+      )}
+
       <motion.div
         style={styles.voteContainerWrapper}
         initial="hidden"
@@ -104,6 +171,43 @@ const Vote = () => {
           </AnimatePresence>
         </motion.div>
       </motion.div>
+
+      <div ref={contentRef} style={styles.tutorialContainer}>
+        <strong>IKUTI PANDUAN VOTE INI UNTUK VOTE SERVER VISANTARA!</strong>
+        <li>Buka Minecraft, lalu masuk ke server Visantara</li>
+        <li>Ketik perintah <strong>/vote</strong> di chat</li>
+        <li>Klik link yang muncul di chat/gui</li>
+        <li>Pilih server Visantara dari daftar server yang ada</li>
+        <li>Klik tombol "Vote" di halaman server Visantara</li>
+        <li>Masukkan username Minecraft Anda di kolom yang tersedia</li>
+        <li>Klik tombol "Vote" untuk mengirimkan vote Anda</li>
+        <li>Setelah vote berhasil, Anda akan menerima reward di dalam game</li>
+        <br />
+        Contoh Cara Vote : 
+        <br />
+        Boenyy &lt;-- untuk java 
+        <br />
+        .Boenyy &lt;-- untuk bedrock
+        <br />
+        <br />
+        <em>
+          Note : Jika anda sudah mengikuti panduan di atas, namun anda tidak mendapatkan reward vote Silahkan hubungi admin di server/discord!
+        </em>
+      </div>
+
+      <style>{`
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-10px);
+          }
+          60% {
+            transform: translateY(-5px);
+          }
+        }
+      `}</style>
     </div>
   );
 };
