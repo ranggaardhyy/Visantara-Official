@@ -11,7 +11,6 @@ import Terms from "./pages/legal/Terms";
 import Privacy from "./pages/legal/Privacy";
 import Stafflist from "./pages/community/Stafflist";
 import Cookies from "./pages/legal/Cookies";
-import Announcement from "./pages/community/Announcement";
 
 function App() {
     return (
@@ -19,7 +18,6 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/announcement" element={<Announcement />} />
                 <Route path="/store" element={<Store />} />
                 <Route path="/vote" element={<Vote />} />
                 <Route path="/admin" element={<AdminDashboard />} />
