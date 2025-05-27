@@ -57,32 +57,35 @@ const Rules = () => {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8 } },
   };
+        ref={contentRef}
+        style={styles.content}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { duration: 0.8 } },
+        }}
+      >
+        <motion.h1
+          style={styles.title}
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Visantara Server Rules
+        </motion.h1>
+        <motion.p style={styles.paragraph}>
+          Welcome to Visantara Server! Please read and follow the rules...
+        </motion.p>
 
-  return (
-    <div style={styles.container}>
-      <Hero />
-      <motion.div
-  style={styles.content}
-  initial="hidden"
-  animate="visible"
-  variants={containerVariants}
->
-  <motion.h1
-    style={styles.title}
-    initial={{ scale: 0.8 }}
-    animate={{ scale: 1 }}
-    transition={{ duration: 0.5 }}
-  >
-    Visantara Server Rules
-  </motion.h1>
-  <motion.p style={styles.paragraph}>
-    Welcome to Visantara Server! Please read and follow the rules to ensure a safe
-    and enjoyable experience for everyone. By playing on this server, you agree to
-    abide by these rules.
-  </motion.p>
-  <motion.div
-    style={styles.sectionTitle}
-    initial={{ x: -50 }}
+        <motion.div
+          style={styles.sectionTitle}
+          initial={{ x: -50 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <FaListOl size={24} />
+          <span>Daftar Isi:</span>
     animate={{ x: 0 }}
     transition={{ duration: 0.5 }}
   >
